@@ -11,11 +11,10 @@ var mainController = ['$scope', myFunc ];
   return {'width' : style.width, 'height':style.height};
 }
 
-/*
+
 function makeElementPosition(boxDimension, Elements){
 	console.log(boxDimension);
 	console.log(Elements);
 
 	return 0;
 }
-*/

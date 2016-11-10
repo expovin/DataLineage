@@ -36,7 +36,7 @@ define( [	"qlik",
 					},
 					measures : {
 						uses : "measures",
-						min : 1
+						min : 0
 					},
 					sorting : {
 						uses : "sorting"
@@ -64,8 +64,8 @@ define( [	"qlik",
 			//setup scope.table
 
 			this.$scope.settings = layout.settings;
-			this.$scope.realSize = getElementContentWidth(document.getElementById(Line));
-		//	this.$scope.elePosition = makeElementPosition(this.$scope.realSize, qlik.table( this ));
+			this.$scope.realSize = getElementContentWidth(document.getElementById("Line"));
+			this.$scope.elePosition = makeElementPosition(this.$scope.realSize, qlik.table( this ));
 
 			if ( !this.$scope.table ) {
 				this.$scope.table = qlik.table( this );
