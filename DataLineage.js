@@ -4,7 +4,8 @@ define( [	"qlik",
 			"text!./css/myStyle.css",
 			"./js/DataLineage.controller",
 			"./js/DataLineage.Services",
-			"./js/settings/GeneralSettings"						// Variable with the General settings
+			"./js/settings/GeneralSettings",						// Variable with the General settings
+			"./js/settings/ImageSettings"	
 						
 		],
 	function ( qlik, $, template, cssContent ) {
@@ -32,7 +33,8 @@ define( [	"qlik",
 				items : {
 					dimensions : {
 						uses : "dimensions",
-						min : 1
+						min : 1,
+						max : 5
 					},
 					measures : {
 						uses : "measures",
@@ -41,7 +43,9 @@ define( [	"qlik",
 					sorting : {
 						uses : "sorting"
 					},
-					settings : {}
+
+					settings : {},
+					image : {}
 				}
 			},
 
@@ -58,14 +62,18 @@ define( [	"qlik",
 	//	me.app = qlik.currApp(this);
 
 		me.definition.items.settings = generalSettings;
+		me.definition.items.image = imageSettings;
 
 
 		me.paint = function($element,layout) {
 			//setup scope.table
 
-			this.$scope.settings = layout.settings;
+			var Metadata = splitObject(layout.qHyperCube.qDataPages[0].qMatrix);
+
+			//this.$scope.settings = layout.settings;
+
 			this.$scope.realSize = getElementContentWidth(document.getElementById("Line"));
-			this.$scope.elePosition = makeElementPosition(this.$scope.realSize, qlik.table( this ));
+			this.$scope.elePosition = makeElementPosition(this.$scope.realSize, Metadata, layout.settings);
 
 			if ( !this.$scope.table ) {
 				this.$scope.table = qlik.table( this );

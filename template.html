@@ -3,26 +3,10 @@
 <svg id="Line" width="100%" height="100%">
 
   <g ng-repeat="ele in elePosition">
-	  <rect x="20" y="{{ele.hPos}}" width="50" height="10" fill="red" fill-opacity="0.6">
+	  <rect x="{{ele.wPos*20}}" y="{{ele.hPos}}" width="50" height="10" fill="red" fill-opacity="0.6">
 	  </rect>
-	  <text x="20" y="{{ele.hPos}}" font-family="Verdana" font-size="10" fill="blue"> {{ele.Name}} </text>
+	  <text x="{{ele.wPos * 20}}" y="{{ele.hPos}}" font-family="Verdana" font-size="10" fill="blue"> {{ele.Name}} </text>
   </g>
 </svg>
-
-<!--
-	<table>
-		<thead>
-		<tr>
-			<th ng-repeat="head in table.headers track by $index" qva-activate="head.orderBy()">{{head.qFallbackTitle}}</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr ng-repeat="row in table.rows track by $index">
-			<td ng-repeat="cell in row.cells track by $index" class="selectable" ng-class="{'selected':cell.selected,'numeric':cell.qNum}" qva-activate="cell.select($event)">{{cell.qText}}</td>
-		</tr>
-		</tbody>
-	</table>
-	<button ng-if="table.rowCount>table.rows.length" qva-activate="table.getMoreData()" class="lui-button more">More...</button>
--->
 	
 </div>

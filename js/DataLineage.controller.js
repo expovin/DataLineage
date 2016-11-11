@@ -11,28 +11,71 @@ var mainController = ['$scope', myFunc ];
   return {'width' : style.width, 'height':style.height};
 }
 
+function splitObject(matrix){
 
-function makeElementPosition(boxDimension, Elements){
+	var nexMatrix=[];
+	for(var i=0; i<matrix[0].length; i++ )
+		nexMatrix.push([]);
 
-	console.log( Elements.qHyperCube.qDataPages[0].qMatrix[0][0].qText);
+	for(ele in matrix){
+		for (f in matrix[ele]){
+			var found = jQuery.inArray(matrix[ele][f].qText, nexMatrix[f]);
+			if (found == -1) {
+				nexMatrix[f].push(matrix[ele][f].qText);
+			}
+
+		}
+	}
+	return nexMatrix;
+
+}
+
+function makeElementPosition(boxDimension, Elements, settings){
+
 	var elements=[];
 	var element={};
+	var hDistance=[];
+
+	console.log(settings);
+
+	var marginRight=settings.image.margin.right;
+	var marginLeft=settings.image.margin.left;
+	var marginTop=settings.image.margin.top;
+	var marginBottom=settings.image.margin.bottom;
+
 
 	var height = boxDimension.height.substring(0,boxDimension.height.indexOf("px"));
 	var width = boxDimension.width.substring(0,boxDimension.width.indexOf("px"));
-	var hDistance = height / Elements.qHyperCube.qDataPages[0].qMatrix.length;
 
-	var count=0;
-	for(ele in Elements.qHyperCube.qDataPages[0].qMatrix){
-		
-		console.log( Elements.qHyperCube.qDataPages[0].qMatrix[ele][0].qText);
-		element['Name'] = Elements.qHyperCube.qDataPages[0].qMatrix[ele][0].qText;
-		element['hPos'] = count * hDistance;
-		elements.push(element);
-		element={};
-		count +=1;
+	var imgHeight = height - marginTop - marginBottom;
+	var imgWidth = width - marginRight - marginLeft;
+
+	console.log("width :"+width+" width:"+width+" marginRight:"+marginRight+" marginLeft"+marginLeft);
+
+
+	wDistance = imgWidth / Elements.length;
+
+	console.log("wDistance = "+wDistance+" imgWidth : "+imgWidth+" Elements.length :"+Elements.length);
+	console.log("marginRight : "+marginRight);
+	for(ele in Elements){
+		hDistance[ele] = imgHeight / Elements[ele].length;
 	}
 
+
+	var countH=0;
+	for(ele in Elements){
+		var countW=0;
+		for(field in Elements[ele]) {
+
+			element['Name'] = Elements[ele][field];
+			element['hPos'] = (countW * hDistance[ele])+marginTop;
+			element['wPos'] = (countH * wDistance) + marginRight;
+			elements.push(element);
+			element={};
+			countH +=1;
+			countW +=1;
+		}
+	}
 	console.log(elements);
 	return elements;
 }

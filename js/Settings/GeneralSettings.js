@@ -1,16 +1,15 @@
 var generalSettings = {
 		uses : "settings",
-			items : {
-				initFetchRows : {
+		items : {
+			initFetchRows : {
 					ref : "qHyperCubeDef.qInitialDataFetch.0.qHeight",
 					label : "Initial fetch rows",
 					type : "number",
 					defaultValue : 50
-				},
-
-				general: {
+			},
+			general: {
 					type: "items",
-					label: "Image",
+					label: "General",
 					items : {
 						Width: {
 							type: "number",
@@ -26,7 +25,8 @@ var generalSettings = {
 							defaultValue: 100,
 							ref: "settings.image.height"
 						}
-					}
+					
 				}				
 		}
+	}
 }
