@@ -62,19 +62,19 @@ function makeElementPosition(boxDimension, Elements, settings){
 	}
 
 
-	var countH=0;
+	var countW=0;
 	for(ele in Elements){
-		var countW=0;
+		var countH=0;
 		for(field in Elements[ele]) {
 
 			element['Name'] = Elements[ele][field];
-			element['hPos'] = (countW * hDistance[ele])+marginTop;
-			element['wPos'] = (countH * wDistance) + marginRight;
+			element['hPos'] = (countH * hDistance[ele])+marginTop;
+			element['wPos'] = (countW * wDistance) + marginLeft;
 			elements.push(element);
 			element={};
 			countH +=1;
-			countW +=1;
 		}
+		countW +=1;
 	}
 	console.log(elements);
 	return elements;
