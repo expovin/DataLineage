@@ -33,7 +33,8 @@ define( [	"qlik",
 						qWidth: 8,
 						qHeight: 1000
 					}]
-				}
+				},
+				selectionMode : "QUICK"
 			},
 
 
@@ -80,9 +81,10 @@ define( [	"qlik",
 
 		me.paint = function($element,layout) {
 			//setup scope.table
+			console.log(layout);
 			
 			var Metadata = splitObject(layout.qHyperCube.qDataPages[0].qMatrix);
-			console.log(layout);
+			
 
 			me.app.createCube(myHyperCube,Details);
 			var _this=this;
