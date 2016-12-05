@@ -3,11 +3,6 @@ rect.path{
 	color: blue;
 }
 
-line.linkBetweenObj{
-	stroke : black;
-
-}
-
 #collapseExample {
 	position: absolute;
 	bottom: 0;

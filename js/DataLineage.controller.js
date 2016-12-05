@@ -2,7 +2,7 @@
 var mainController = ['$scope', function ( $scope ) {
 
 	$scope.Table={};
-	$scope.pathColor = "black";
+
 
 	$scope.writeTable = function(a){
 		console.log(a.ele.Name);
@@ -10,8 +10,12 @@ var mainController = ['$scope', function ( $scope ) {
 		$scope.AddInfo = $scope.AdditionalInfo[a.ele.Name];
 		console.log($scope.AddInfo);
 		$('#collapseExample').collapse('show');
-		$scope.pathColor = "red";
 
+		for(var arrow in $scope.arrowPosition){
+			$scope.arrowPosition[arrow][6]='#333';
+		}
+
+		$scope.arrowPosition = colorPath(a.ele.Name,$scope.arrowPosition,0);
 
 	}
 
@@ -19,12 +23,31 @@ var mainController = ['$scope', function ( $scope ) {
 		console.log("Mouse Exit");
 		$scope.Table = {};
 		$('#collapseExample').collapse('hide');
-		$scope.pathColor = "black";
+
+		for(var arrow in $scope.arrowPosition){
+			$scope.arrowPosition[arrow][6]='black';
+		}
+
 	}
 	//me.app.createCube(myHyperCube,Details);
 
 }];
 
+
+var colorPath  = function myself  (elemName,arrowPosition, step){
+
+	if((step>6) || (step == undefined))
+		return ;
+
+	for(var arrow in arrowPosition){
+		if((arrowPosition[arrow][4] == elemName) || (arrowPosition[arrow][5] == elemName)) {
+			arrowPosition[arrow][6]='red';
+			step = step + 1;
+			myself(arrowPosition[arrow][4],arrowPosition,step);
+		}
+	}
+	return (arrowPosition);
+}
 
 
 function makeAdditionalInfo(reply,callback) {
@@ -110,6 +133,19 @@ function calcoloNuovoPuntoFinale(x1, y1, x2, y2){
 	return([x,y]);
 }
 
+
+String.prototype.hashCode = function() {
+  var hash = 0, i, chr, len;
+  if (this.length === 0) return hash;
+  for (i = 0, len = this.length; i < len; i++) {
+    chr   = this.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+
 function makeArrowsPosition(arrows, elements){
 
 
@@ -118,6 +154,7 @@ function makeArrowsPosition(arrows, elements){
 	for (var i = 0, len = elements.length; i < len; i++) {
 	    lookup[elements[i].Name] = {'backPoint' : elements[i]['backPoint'], 'forwardPoint':elements[i]['forwardPoint'],Node:elements[i].Name};
 	}
+//	console.log("Lookup");
 //	console.log(lookup);
 
 //	console.log(elements);
@@ -127,17 +164,26 @@ function makeArrowsPosition(arrows, elements){
 		var EleTo=Ele[1];
 		//console.log("From: "+EleFrom+" To: "+ EleTo);
 
+
 		if((EleTo != '-') && (EleFrom != '-'))
 		{
-			nuoveCoord = calcoloNuovoPuntoFinale(lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, lookup[EleTo].backPoint.wPos,  lookup[EleTo].backPoint.hPos);
-			var x = nuoveCoord[0];
-			var y = nuoveCoord[1];
+			var key =  EleFrom+"^"+EleTo;
+			var hash = key.hashCode().toString(16);
+			var coords=[];
 
-			var link=[lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, x,  y, lookup[EleFrom].Node, lookup[EleTo].Node  ];
-			//var link=[lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, lookup[EleTo].backPoint.wPos,  lookup[EleTo].backPoint.hPos];
-		//	console.log("Coordinates:");
-		//	console.log(link);
-			links.push(link);
+
+				nuoveCoord = calcoloNuovoPuntoFinale(lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, lookup[EleTo].backPoint.wPos,  lookup[EleTo].backPoint.hPos);
+				var x = nuoveCoord[0];
+				var y = nuoveCoord[1];
+
+				var link=[lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, x,  y, lookup[EleFrom].Node, lookup[EleTo].Node,'black'];
+
+				//coords[hash] = link
+				//var link=[lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, lookup[EleTo].backPoint.wPos,  lookup[EleTo].backPoint.hPos];
+			//	console.log("Coordinates:");
+			//	console.log(link);
+				links.push(link);
+			
 		}
 		
 	}
@@ -194,30 +240,30 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 			
 			switch(qDimensionInfo[ele].qFallbackTitle){
 				case "L0":
-					element['icon'] = "http://localhost:4848/extensions/test/Source.PNG";
+					element['icon'] = "http://localhost:4848/extensions/DataLineage/img//Source.PNG";
 					break;
 				case "L1":
-					element['icon'] = "http://localhost:4848/extensions/test/QlikSenseApp.PNG";
+					element['icon'] = "http://localhost:4848/extensions/DataLineage/img//QlikSenseApp.PNG";
 					break;	
 				case "L2":
-					element['icon'] = "http://localhost:4848/extensions/test/Table.PNG";
+					element['icon'] = "http://localhost:4848/extensions/DataLineage/img//Table.PNG";
 					break;
 				case "L3":
-					element['icon'] = "http://localhost:4848/extensions/test/Field.PNG";
+					element['icon'] = "http://localhost:4848/extensions/DataLineage/img//Field.PNG";
 					break;
 				case "L4":
 					console.log(element['Name'].substring(0,1));
 				    if(element['Name'].substring(0,1)=="D") 
-						element['icon'] = "http://localhost:4848/extensions/test/Dimension.PNG";
+						element['icon'] = "http://localhost:4848/extensions/DataLineage/img/Dimension.PNG";
 					else
-						element['icon'] = "http://localhost:4848/extensions/test/Expressions.PNG";
+						element['icon'] = "http://localhost:4848/extensions/DataLineage/img/Expressions.PNG";
 					break;	
 
 				case "L5":
-					element['icon'] = "http://localhost:4848/extensions/test/Sheet.PNG";
+					element['icon'] = "http://localhost:4848/extensions/DataLineage/img/Sheet.PNG";
 					break;	
 				case "L6":
-					element['icon'] = "http://localhost:4848/extensions/test/Stories.PNG";
+					element['icon'] = "http://localhost:4848/extensions/DataLineage/img/Stories.PNG";
 					break;					
 			}			
 
