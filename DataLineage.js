@@ -24,6 +24,7 @@ define( [	"qlik",
 		var AdditionalInfo;
 		var me = {
 			template: template,
+			
 			initialProperties: {
 				version: 1.2,
 				qHyperCubeDef: {
@@ -33,10 +34,8 @@ define( [	"qlik",
 						qWidth: 8,
 						qHeight: 1000
 					}]
-				},
-				selectionMode : "QUICK"
+				}
 			},
-
 
 
 			definition : {
@@ -95,11 +94,13 @@ define( [	"qlik",
 				});
 			}	
 
+					//me.app.field('Connection Name').select(['C'], true, true);
 
 					this.$scope.realSize = getElementContentWidth(document.getElementById("Line"));
 					this.$scope.elePosition = makeElementPosition(this.$scope.realSize, Metadata[0], layout.settings,layout.qHyperCube.qDimensionInfo);
 					this.$scope.arrowPosition = makeArrowsPosition(Metadata[1],this.$scope.elePosition);
-					console.log(this.$scope.arrowPosition);
+
+					this.$scope.QlikApp =  qlik.currApp();
 
 
 					if ( !this.$scope.table ) {

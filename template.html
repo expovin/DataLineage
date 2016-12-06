@@ -29,7 +29,11 @@
 
         <g ng-repeat="ele in elePosition">
 
-          <image xlink:href="{{ele.icon}}" x="{{ele.wPos}}" y="{{ele.hPos}}" height="50px" width="50px" ng-mouseover="writeTable(this)" ng-mouseout="cleanTable(this)"/> 
+          <image xlink:href="{{ele.icon}}"  x="{{ele.wPos}}" y="{{ele.hPos}}" 
+                                            height="50px" width="50px" 
+                                            ng-mouseover="writeTable(this)" 
+                                            ng-mouseout="cleanTable(this)"
+                                            ng-click="makeASelection(this)"/> 
 
 
 

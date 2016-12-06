@@ -3,34 +3,42 @@ var mainController = ['$scope', function ( $scope ) {
 
 	$scope.Table={};
 
+	$scope.makeASelection = function(){
+		console.log("Click!");
+		$scope.QlikApp.getAppLayout().then(function (app) {
+			console.log(app);
+			console.log(self);
+			console.log(this);
+			self.backendApi.selectValues(0, 2, true);
+			app.engineApp.clearAll();
+		});
+	}
+
 
 	$scope.writeTable = function(a){
-		console.log(a.ele.Name);
 		$scope.Table.ObjName = a.ele.Name;
 		$scope.AddInfo = $scope.AdditionalInfo[a.ele.Name];
-		console.log($scope.AddInfo);
 		$('#collapseExample').collapse('show');
 
+/*
 		for(var arrow in $scope.arrowPosition){
 			$scope.arrowPosition[arrow][6]='#333';
 		}
-
+*/
 		$scope.arrowPosition = colorPath(a.ele.Name,$scope.arrowPosition,0);
+
+
 
 	}
 
 	$scope.cleanTable = function(a){
-		console.log("Mouse Exit");
 		$scope.Table = {};
 		$('#collapseExample').collapse('hide');
 
 		for(var arrow in $scope.arrowPosition){
 			$scope.arrowPosition[arrow][6]='black';
 		}
-
 	}
-	//me.app.createCube(myHyperCube,Details);
-
 }];
 
 
@@ -209,6 +217,8 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 
 	var imgHeight = height - marginTop - marginBottom;
 	var imgWidth = width - marginRight - marginLeft;
+
+	console.log(Elements);
 
 	//console.log("width :"+width+" width:"+width+" marginRight:"+marginRight+" marginLeft"+marginLeft);
 
