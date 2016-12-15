@@ -7,6 +7,14 @@ define( [	"qlik",
 			"./js/settings/GeneralSettings",						// Variable with the General settings
 			"./js/settings/ImageSettings",
 			"./js/getHyperCube",
+			"./js/getLevel1HyperCube",
+			"./js/getLevel2HyperCube",
+			"./js/getLevel3HyperCube",
+			"./js/getLevel4HyperCube",
+			"./js/getLevel5HyperCube",
+			"./js/getLevel6HyperCube",
+			"./js/getLevel7HyperCube",
+			"./js/getLevel8HyperCube",
 				// Bootstrap File
 			//"./bootstrap-3.3.7-dist/js/bootstrap",
 			//"text!./bootstrap-3.3.7-dist/css/bootstrap.min.css"	
@@ -21,7 +29,9 @@ define( [	"qlik",
 		$( '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">' ).appendTo( 'head' ); // Font Awesome CDN		
 		$( '<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">' ).appendTo( 'body' ); // Bootstrap.js CDN
 
-		var AdditionalInfo;
+		var AdditionalInfo=[];
+		var flagFirstPaintExecution=0;
+		var call=0
 		var me = {
 			template: template,
 			
@@ -31,7 +41,7 @@ define( [	"qlik",
 					qDimensions: [],
 					qMeasures: [],
 					qInitialDataFetch: [{
-						qWidth: 8,
+						qWidth: 9,
 						qHeight: 1000
 					}]
 				}
@@ -45,7 +55,7 @@ define( [	"qlik",
 					dimensions : {
 						uses : "dimensions",
 						min : 1,
-						max : 7
+						max : 8
 					},
 					measures : {
 						uses : "measures",
@@ -78,48 +88,176 @@ define( [	"qlik",
 
 		me.controller = mainController;
 
+		me.init = function(){
+			console.log("Init");
+		}
+
 		me.paint = function($element,layout) {
-			//setup scope.table
+
+			
+			var _this=this;
+			_this.$scope.MoreInfo=[];
 			console.log(layout);
+
+			var currentdate = new Date();
+/*
+					console.log("Paint richiamata  alle "+
+									currentdate.getHours() + ":" 
+								+ 	currentdate.getMinutes() + ":" 
+								+ 	currentdate.getSeconds() +"."
+								+	currentdate.getMilliseconds());
+*/
 			
 			var Metadata = splitObject(layout.qHyperCube.qDataPages[0].qMatrix);
 			
+			
 
-			me.app.createCube(myHyperCube,Details);
-			var _this=this;
+			//me.app.createCube(myHyperCube,Details);
+			me.app.createCube(varLvl1Data,funLvl1Data);
+			
 
-			function Details(reply, app){
-				makeAdditionalInfo(reply,function(replay){
-				_this.$scope.AdditionalInfo = replay;
-				});
+
+			function funLvl1Data(reply, app){
+				/*
+					console.log("Entrato in lvl1 alle "+
+									currentdate.getHours() + ":" 
+								+ 	currentdate.getMinutes() + ":" 
+								+ 	currentdate.getSeconds() +"."
+								+	currentdate.getMilliseconds());
+				*/
+					makeAdditionalInfo(reply,function(replay){
+						//AdditionalInfo.push(replay);
+						_this.$scope.MoreInfo.push(replay);
+						me.app.createCube(varLvl2Data,funLvl2Data);
+					});	
 			}	
 
-					//me.app.field('Connection Name').select(['C'], true, true);
+			function funLvl2Data(reply, app){
+				/*
+					console.log("Entrato in lvl2 alle "+
+									currentdate.getHours() + ":" 
+								+ 	currentdate.getMinutes() + ":" 
+								+ 	currentdate.getSeconds() +"."
+								+	currentdate.getMilliseconds());
+				*/
+					makeAdditionalInfo(reply,function(replay){
+						//AdditionalInfo.push(replay);
+						_this.$scope.MoreInfo.push(replay);
+						me.app.createCube(varLvl3Data,funLvl3Data);
+					});	
+			}	
 
-					this.$scope.realSize = getElementContentWidth(document.getElementById("Line"));
-					this.$scope.elePosition = makeElementPosition(this.$scope.realSize, Metadata[0], layout.settings,layout.qHyperCube.qDimensionInfo);
-					this.$scope.arrowPosition = makeArrowsPosition(Metadata[1],this.$scope.elePosition);
+			function funLvl3Data(reply, app){
+				
+				/*
+					console.log("Entrato in lvl3 alle "+
+									currentdate.getHours() + ":" 
+								+ 	currentdate.getMinutes() + ":" 
+								+ 	currentdate.getSeconds() +"."
+								+	currentdate.getMilliseconds());
+				*/
+					makeAdditionalInfo(reply,function(replay){
+						_this.$scope.MoreInfo.push(replay);
+						me.app.createCube(varLvl4Data,funLvl4Data);
 
-					this.$scope.QlikApp =  qlik.currApp();
+					});
+					
 
+			}	
 
-					if ( !this.$scope.table ) {
-						this.$scope.table = qlik.table( this );
-					}
+			function funLvl4Data(reply, app){
 
-					return qlik.Promise.resolve();	
+				/*
+					console.log("Entrato in lvl4 alle "+
+									currentdate.getHours() + ":" 
+								+ 	currentdate.getMinutes() + ":" 
+								+ 	currentdate.getSeconds() +"."
+								+	currentdate.getMilliseconds());
+				*/
+					makeAdditionalInfo(reply,function(replay){
+						_this.$scope.MoreInfo.push(replay);
+						me.app.createCube(varLvl5Data,funLvl5Data);
 
-/*
-			function setAddInfo(){
-				this.$scope.additionalInfo = AdditionalInfo;
-				console.log(AdditionalInfo);
-				console.log(this.$scope.additionalInfo);
+					});
+
+			}	
+
+			function funLvl5Data(reply, app){
+				/*
+					console.log("Entrato in lvl5 alle "+
+									currentdate.getHours() + ":" 
+								+ 	currentdate.getMinutes() + ":" 
+								+ 	currentdate.getSeconds() +"."
+								+	currentdate.getMilliseconds());
+				*/
+					makeAdditionalInfo(reply,function(replay){
+						_this.$scope.MoreInfo.push(replay);
+					//	console.log(_this.$scope.MoreInfo);
+						me.app.createCube(varLvl6Data,funLvl6Data);
+					});
+
 			}
-*/
-			//this.$scope.settings = layout.settings;
-		};
 
-		
+			function funLvl6Data(reply, app){
+				/*
+					console.log("Entrato in lvl6 alle "+
+									currentdate.getHours() + ":" 
+								+ 	currentdate.getMinutes() + ":" 
+								+ 	currentdate.getSeconds() +"."
+								+	currentdate.getMilliseconds());
+				*/
+					makeAdditionalInfo(reply,function(replay){
+						_this.$scope.MoreInfo.push(replay);
+					//	console.log(_this.$scope.MoreInfo);
+						me.app.createCube(varLvl7Data,funLvl7Data);
+					});
+
+			}
+
+			function funLvl7Data(reply, app){
+				/*
+					console.log("Entrato in lvl7 alle "+
+									currentdate.getHours() + ":" 
+								+ 	currentdate.getMinutes() + ":" 
+								+ 	currentdate.getSeconds() +"."
+								+	currentdate.getMilliseconds());
+				*/
+					makeAdditionalInfo(reply,function(replay){
+						_this.$scope.MoreInfo.push(replay);
+			//			console.log(_this.$scope.MoreInfo);
+						me.app.createCube(varLvl8Data,funLvl8Data);
+					});
+			}
+
+			function funLvl8Data(reply, app){
+				/*
+					console.log("Entrato in lvl8 alle "+
+									currentdate.getHours() + ":" 
+								+ 	currentdate.getMinutes() + ":" 
+								+ 	currentdate.getSeconds() +"."
+								+	currentdate.getMilliseconds());
+				*/
+					makeAdditionalInfo(reply,function(replay){
+						_this.$scope.MoreInfo.push(replay);
+				//		console.log(_this.$scope.MoreInfo);
+					});
+				
+			}
+
+			this.$scope.realSize = getElementContentWidth(document.getElementById("Line"));
+			this.$scope.elePosition = makeElementPosition(this.$scope.realSize, Metadata[0], layout.settings,layout.qHyperCube.qDimensionInfo);
+			this.$scope.arrowPosition = makeArrowsPosition(Metadata[1],this.$scope.elePosition);
+			this.$scope.QlikApp =  qlik.currApp();
+
+
+			if ( !this.$scope.table ) {
+				this.$scope.table = qlik.table( this );
+			}
+			return qlik.Promise.resolve();	
+
+			
+
+		};		
 
 		return me;
 	});

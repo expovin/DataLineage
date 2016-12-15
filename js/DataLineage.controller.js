@@ -5,19 +5,52 @@ var mainController = ['$scope', function ( $scope ) {
 
 	$scope.makeASelection = function(){
 		console.log("Click!");
-		$scope.QlikApp.getAppLayout().then(function (app) {
-			console.log(app);
-			console.log(self);
-			console.log(this);
-			self.backendApi.selectValues(0, 2, true);
-			app.engineApp.clearAll();
-		});
+//		console.log(this);
+		var Field='Lineage Level '+this.ele.Level;
+
+			switch(this.ele.Level){
+				case 1:
+					Field="libName";					
+					break;
+				case 2:
+					Field="[Document Id]";
+					break;	
+				case 3:
+					Field="[%KeyTable]";
+					break;
+				case "Lineage Level 4":
+					Field="[Field Id]";
+					break;
+				case 5:
+					Field="[%KeyLibraryObjectUsage]";
+					break;	
+
+				case 6:
+					Field="[Sheet Id]";
+					break;
+				case "Lineage Level 7":
+					Field="[Sheet Object Id]";
+					break;	
+				case "Lineage Level 8":
+					Field="[Story Id]";
+					break;					
+			}		
+
+
+		
+		console.log("Field : "+Field+" Value : "+this.ele.Name);
+		$scope.QlikApp.field(Field).selectValues([this.ele.Name], true, true);
+
 	}
 
 
 	$scope.writeTable = function(a){
-		$scope.Table.ObjName = a.ele.Name;
-		$scope.AddInfo = $scope.AdditionalInfo[a.ele.Name];
+//		console.log(a.ele);
+		console.log( $scope.MoreInfo);
+		console.log("Level :"+a.ele.Level+" Name :"+a.ele.Name);
+//		console.log( $scope.arrowPosition);
+		$scope.Table.ObjName = $scope.MoreInfo[a.ele.Level][a.ele.Name].Title;
+		$scope.AddInfo = $scope.MoreInfo[a.ele.Level][a.ele.Name];
 		$('#collapseExample').collapse('show');
 
 /*
@@ -27,8 +60,6 @@ var mainController = ['$scope', function ( $scope ) {
 */
 		$scope.arrowPosition = colorPath(a.ele.Name,$scope.arrowPosition,0);
 
-
-
 	}
 
 	$scope.cleanTable = function(a){
@@ -36,7 +67,7 @@ var mainController = ['$scope', function ( $scope ) {
 		$('#collapseExample').collapse('hide');
 
 		for(var arrow in $scope.arrowPosition){
-			$scope.arrowPosition[arrow][6]='black';
+			$scope.arrowPosition[arrow][6]='#afafaf';
 		}
 	}
 }];
@@ -49,7 +80,7 @@ var colorPath  = function myself  (elemName,arrowPosition, step){
 
 	for(var arrow in arrowPosition){
 		if((arrowPosition[arrow][4] == elemName) || (arrowPosition[arrow][5] == elemName)) {
-			arrowPosition[arrow][6]='red';
+			arrowPosition[arrow][6]='#6bb344';
 			step = step + 1;
 			myself(arrowPosition[arrow][4],arrowPosition,step);
 		}
@@ -60,6 +91,11 @@ var colorPath  = function myself  (elemName,arrowPosition, step){
 
 function makeAdditionalInfo(reply,callback) {
 	var outFields = {};
+
+
+	var numDimensioni = reply.qHyperCube.qDimensionInfo.length;
+	var numMisure = reply.qHyperCube.qMeasureInfo.length;
+
 	for(var fields in reply.qHyperCube.qDataPages[0].qMatrix){
 		for(var field in reply.qHyperCube.qDataPages[0].qMatrix[fields]){
 		
@@ -68,16 +104,25 @@ function makeAdditionalInfo(reply,callback) {
 				var outField = {};
 			}
 			else {
-				var FieldName = reply.qHyperCube.qDimensionInfo[field].qFallbackTitle; 
-				var FieldValue = reply.qHyperCube.qDataPages[0].qMatrix[fields][field].qText;
+				if(field<numDimensioni){
+					var FieldName = reply.qHyperCube.qDimensionInfo[field].qFallbackTitle; 
+					var FieldValue = reply.qHyperCube.qDataPages[0].qMatrix[fields][field].qText;
+					if( (FieldName.indexOf("Name")>0) || (FieldName.indexOf("Title")>0))
+						var Title = FieldValue;
+				}
+				else {
+					var FieldName = reply.qHyperCube.qMeasureInfo[field-numDimensioni].qFallbackTitle; 
+					var FieldValue = reply.qHyperCube.qDataPages[0].qMatrix[fields][field].qText;
+				}
 
 				var obj={};
-				obj[FieldName] = FieldValue
+				obj[FieldName] = FieldValue;
 				/*
 				if(!outField[campo])
 					outField[campo] = {};
 				*/
 				outField[FieldName] = FieldValue;
+				outField['Title'] = Title;
 
 			}
 			
@@ -159,43 +204,51 @@ function makeArrowsPosition(arrows, elements){
 
 	var lookup = {};
 	var links = [];
+
 	for (var i = 0, len = elements.length; i < len; i++) {
-	    lookup[elements[i].Name] = {'backPoint' : elements[i]['backPoint'], 'forwardPoint':elements[i]['forwardPoint'],Node:elements[i].Name};
+		console.log(elements[i]);
+	    lookup[elements[i].Name] = {'backPoint' : elements[i]['backPoint'], 'forwardPoint':elements[i]['forwardPoint'],'Node':elements[i].Name,'Level':elements[i].Level};
 	}
 //	console.log("Lookup");
 //	console.log(lookup);
 
-//	console.log(elements);
+	console.log(arrows);
 	for(arrow in arrows){
 		var Ele=arrows[arrow].split("^");
 		var EleFrom=Ele[0];
 		var EleTo=Ele[1];
-		//console.log("From: "+EleFrom+" To: "+ EleTo);
+		
 
 
 		if((EleTo != '-') && (EleFrom != '-'))
 		{
+
 			var key =  EleFrom+"^"+EleTo;
 			var hash = key.hashCode().toString(16);
 			var coords=[];
 
+			console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
+			nuoveCoord = calcoloNuovoPuntoFinale(lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, lookup[EleTo].backPoint.wPos,  lookup[EleTo].backPoint.hPos);
+			var x = nuoveCoord[0];
+			var y = nuoveCoord[1];
 
-				nuoveCoord = calcoloNuovoPuntoFinale(lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, lookup[EleTo].backPoint.wPos,  lookup[EleTo].backPoint.hPos);
-				var x = nuoveCoord[0];
-				var y = nuoveCoord[1];
-
-				var link=[lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, x,  y, lookup[EleFrom].Node, lookup[EleTo].Node,'black'];
-
-				//coords[hash] = link
-				//var link=[lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, lookup[EleTo].backPoint.wPos,  lookup[EleTo].backPoint.hPos];
-			//	console.log("Coordinates:");
-			//	console.log(link);
-				links.push(link);
-			
+			var link=[lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, x,  y, lookup[EleFrom].Node, lookup[EleTo].Node,'#afafaf'];
+			links.push(link);
 		}
 		
+		else if(arrow == 3)
+		{
+
+				EleTo=arrows[4].split("^")[1];
+
+				console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
+
+
+		}
+
 	}
-	console.log(links);
+
+	//console.log(links);
 	return(links);
 }
 
@@ -218,7 +271,7 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 	var imgHeight = height - marginTop - marginBottom;
 	var imgWidth = width - marginRight - marginLeft;
 
-	console.log(Elements);
+//	console.log(Elements);
 
 	//console.log("width :"+width+" width:"+width+" marginRight:"+marginRight+" marginLeft"+marginLeft);
 
@@ -249,31 +302,53 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 
 			
 			switch(qDimensionInfo[ele].qFallbackTitle){
-				case "L0":
-					element['icon'] = "http://localhost:4848/extensions/DataLineage/img//Source.PNG";
+				case "Lineage Level 1":
+					element['icon'] = "/extensions/datalineage/img/Source.PNG";
+					element['Level'] = 0;
 					break;
-				case "L1":
-					element['icon'] = "http://localhost:4848/extensions/DataLineage/img//QlikSenseApp.PNG";
+				case "Lineage Level 2":
+					element['icon'] = "/extensions/datalineage/img/QlikSenseApp.PNG";
+					element['Level'] = 1;
 					break;	
-				case "L2":
-					element['icon'] = "http://localhost:4848/extensions/DataLineage/img//Table.PNG";
+				case "Lineage Level 3":
+					element['icon'] = "/extensions/datalineage/img/Table.PNG";
+					element['Level'] = 2;
 					break;
-				case "L3":
-					element['icon'] = "http://localhost:4848/extensions/DataLineage/img//Field.PNG";
+				case "Lineage Level 4":
+					element['icon'] = "/extensions/datalineage/img/Field.PNG";
+					element['Level'] = 3;
 					break;
-				case "L4":
-					console.log(element['Name'].substring(0,1));
+				case "Lineage Level 5":
+				//	console.log("RVR look!", element['Name'].substring(0,1));
+					element['Level'] = 4;
 				    if(element['Name'].substring(0,1)=="D") 
-						element['icon'] = "http://localhost:4848/extensions/DataLineage/img/Dimension.PNG";
-					else
-						element['icon'] = "http://localhost:4848/extensions/DataLineage/img/Expressions.PNG";
+						{
+							element['icon'] = "/extensions/datalineage/img/Dimension.PNG";
+						//	console.log("should pain dim");
+						}
+					else if (element['Name'].substring(0,1)=="M") 
+						{
+							element['icon'] = "/extensions/datalineage/img/Expression.PNG";
+						//	console.log("should pain measure");
+						}
+					else// (element['Name'].substring(0,1)=="V") 
+						{
+							element['icon'] = "/extensions/datalineage/img/ItemLibrary.PNG";
+						//	console.log("should pain viz");
+						}
 					break;	
 
-				case "L5":
-					element['icon'] = "http://localhost:4848/extensions/DataLineage/img/Sheet.PNG";
+				case "Lineage Level 6":
+					element['icon'] = "/extensions/datalineage/img/Sheet.PNG";
+					element['Level'] = 5;
+					break;
+				case "Lineage Level 7":
+					element['icon'] = "/extensions/datalineage/img/Visualization.PNG";
+					element['Level'] = 6;
 					break;	
-				case "L6":
-					element['icon'] = "http://localhost:4848/extensions/DataLineage/img/Stories.PNG";
+				case "Lineage Level 8":
+					element['icon'] = "/extensions/datalineage/img/StoryVisualization.PNG";
+					element['Level'] = 7;
 					break;					
 			}			
 
@@ -283,13 +358,13 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 			element['wPos'] = ((countW * wDistance) + marginLeft);
 
 			// BackPoint attach
-			backPoint['hPos'] = element['hPos']+25;
+			backPoint['hPos'] = element['hPos']+15;
 			backPoint['wPos'] = element['wPos'];
 			element['backPoint']=backPoint;
 
 			//forwardPoint
-			forwardPoint['hPos'] = element['hPos']+25
-			forwardPoint['wPos'] = element['wPos']+50;
+			forwardPoint['hPos'] = element['hPos']+15
+			forwardPoint['wPos'] = element['wPos']+35;
 			element['forwardPoint']=forwardPoint;
 
 			elements.push(element);
