@@ -226,7 +226,14 @@ function makeArrowsPosition(arrows, elements){
 			var key =  EleFrom+"^"+EleTo;
 			var hash = key.hashCode().toString(16);
 			var coords=[];
+		}
+		else if(arrow == 3)
+		{
 
+				EleTo=arrows[4].split("^")[1];
+				console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
+		}
+		if(((EleTo != '-') && (EleFrom != '-')) || (arrow == 3)) {
 			console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
 			nuoveCoord = calcoloNuovoPuntoFinale(lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, lookup[EleTo].backPoint.wPos,  lookup[EleTo].backPoint.hPos);
 			var x = nuoveCoord[0];
@@ -235,16 +242,7 @@ function makeArrowsPosition(arrows, elements){
 			var link=[lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, x,  y, lookup[EleFrom].Node, lookup[EleTo].Node,'#afafaf'];
 			links.push(link);
 		}
-		
-		else if(arrow == 3)
-		{
 
-				EleTo=arrows[4].split("^")[1];
-
-				console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
-
-
-		}
 
 	}
 
