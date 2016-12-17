@@ -72,8 +72,8 @@ var varLvl7Data = {
 			}
 		}
 	],
-	"qSuppressZero": false,
-	"qSuppressMissing": false,
+	"qSuppressZero": true,
+	"qSuppressMissing": true,
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"

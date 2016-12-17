@@ -89,42 +89,23 @@ define( [	"qlik",
 		me.controller = mainController;
 
 		me.init = function(){
+
 			console.log("Init");
-		}
+		};
 
 		me.paint = function($element,layout) {
 
 			
 			var _this=this;
 			_this.$scope.MoreInfo=[];
-			console.log(layout);
 
-			var currentdate = new Date();
-/*
-					console.log("Paint richiamata  alle "+
-									currentdate.getHours() + ":" 
-								+ 	currentdate.getMinutes() + ":" 
-								+ 	currentdate.getSeconds() +"."
-								+	currentdate.getMilliseconds());
-*/
-			
 			var Metadata = splitObject(layout.qHyperCube.qDataPages[0].qMatrix);
 			
-			
-
-			//me.app.createCube(myHyperCube,Details);
 			me.app.createCube(varLvl1Data,funLvl1Data);
 			
 
-
 			function funLvl1Data(reply, app){
-				/*
-					console.log("Entrato in lvl1 alle "+
-									currentdate.getHours() + ":" 
-								+ 	currentdate.getMinutes() + ":" 
-								+ 	currentdate.getSeconds() +"."
-								+	currentdate.getMilliseconds());
-				*/
+
 					makeAdditionalInfo(reply,function(replay){
 						//AdditionalInfo.push(replay);
 						_this.$scope.MoreInfo.push(replay);
@@ -133,13 +114,7 @@ define( [	"qlik",
 			}	
 
 			function funLvl2Data(reply, app){
-				/*
-					console.log("Entrato in lvl2 alle "+
-									currentdate.getHours() + ":" 
-								+ 	currentdate.getMinutes() + ":" 
-								+ 	currentdate.getSeconds() +"."
-								+	currentdate.getMilliseconds());
-				*/
+
 					makeAdditionalInfo(reply,function(replay){
 						//AdditionalInfo.push(replay);
 						_this.$scope.MoreInfo.push(replay);
@@ -148,14 +123,7 @@ define( [	"qlik",
 			}	
 
 			function funLvl3Data(reply, app){
-				
-				/*
-					console.log("Entrato in lvl3 alle "+
-									currentdate.getHours() + ":" 
-								+ 	currentdate.getMinutes() + ":" 
-								+ 	currentdate.getSeconds() +"."
-								+	currentdate.getMilliseconds());
-				*/
+
 					makeAdditionalInfo(reply,function(replay){
 						_this.$scope.MoreInfo.push(replay);
 						me.app.createCube(varLvl4Data,funLvl4Data);
@@ -167,13 +135,6 @@ define( [	"qlik",
 
 			function funLvl4Data(reply, app){
 
-				/*
-					console.log("Entrato in lvl4 alle "+
-									currentdate.getHours() + ":" 
-								+ 	currentdate.getMinutes() + ":" 
-								+ 	currentdate.getSeconds() +"."
-								+	currentdate.getMilliseconds());
-				*/
 					makeAdditionalInfo(reply,function(replay){
 						_this.$scope.MoreInfo.push(replay);
 						me.app.createCube(varLvl5Data,funLvl5Data);
@@ -183,13 +144,7 @@ define( [	"qlik",
 			}	
 
 			function funLvl5Data(reply, app){
-				/*
-					console.log("Entrato in lvl5 alle "+
-									currentdate.getHours() + ":" 
-								+ 	currentdate.getMinutes() + ":" 
-								+ 	currentdate.getSeconds() +"."
-								+	currentdate.getMilliseconds());
-				*/
+
 					makeAdditionalInfo(reply,function(replay){
 						_this.$scope.MoreInfo.push(replay);
 					//	console.log(_this.$scope.MoreInfo);
@@ -199,13 +154,7 @@ define( [	"qlik",
 			}
 
 			function funLvl6Data(reply, app){
-				/*
-					console.log("Entrato in lvl6 alle "+
-									currentdate.getHours() + ":" 
-								+ 	currentdate.getMinutes() + ":" 
-								+ 	currentdate.getSeconds() +"."
-								+	currentdate.getMilliseconds());
-				*/
+
 					makeAdditionalInfo(reply,function(replay){
 						_this.$scope.MoreInfo.push(replay);
 					//	console.log(_this.$scope.MoreInfo);
@@ -215,13 +164,7 @@ define( [	"qlik",
 			}
 
 			function funLvl7Data(reply, app){
-				/*
-					console.log("Entrato in lvl7 alle "+
-									currentdate.getHours() + ":" 
-								+ 	currentdate.getMinutes() + ":" 
-								+ 	currentdate.getSeconds() +"."
-								+	currentdate.getMilliseconds());
-				*/
+
 					makeAdditionalInfo(reply,function(replay){
 						_this.$scope.MoreInfo.push(replay);
 			//			console.log(_this.$scope.MoreInfo);
@@ -230,13 +173,7 @@ define( [	"qlik",
 			}
 
 			function funLvl8Data(reply, app){
-				/*
-					console.log("Entrato in lvl8 alle "+
-									currentdate.getHours() + ":" 
-								+ 	currentdate.getMinutes() + ":" 
-								+ 	currentdate.getSeconds() +"."
-								+	currentdate.getMilliseconds());
-				*/
+
 					makeAdditionalInfo(reply,function(replay){
 						_this.$scope.MoreInfo.push(replay);
 				//		console.log(_this.$scope.MoreInfo);

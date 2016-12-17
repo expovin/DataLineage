@@ -1,11 +1,12 @@
 
+
 var mainController = ['$scope', function ( $scope ) {
 
 	$scope.Table={};
 
 	$scope.makeASelection = function(){
-		console.log("Click!");
-//		console.log(this);
+//		console.log("Click!");
+		console.log(this);
 		var Field='Lineage Level '+this.ele.Level;
 
 			switch(this.ele.Level){
@@ -39,25 +40,22 @@ var mainController = ['$scope', function ( $scope ) {
 
 		
 		console.log("Field : "+Field+" Value : "+this.ele.Name);
-		$scope.QlikApp.field(Field).selectValues([this.ele.Name], true, true);
+		console.log($scope.QlikApp.field(Field));
+
+		$scope.QlikApp.field(Field).selectValues([this.ele.Name], false);
 
 	}
 
 
 	$scope.writeTable = function(a){
-//		console.log(a.ele);
+
 		console.log( $scope.MoreInfo);
 		console.log("Level :"+a.ele.Level+" Name :"+a.ele.Name);
-//		console.log( $scope.arrowPosition);
-		$scope.Table.ObjName = $scope.MoreInfo[a.ele.Level][a.ele.Name].Title;
+	//	console.log( $scope.arrowPosition);
+		$scope.Table.ObjName = $scope.MoreInfo[a.ele.Level][a.ele.Name].Title || "No Title";
 		$scope.AddInfo = $scope.MoreInfo[a.ele.Level][a.ele.Name];
 		$('#collapseExample').collapse('show');
 
-/*
-		for(var arrow in $scope.arrowPosition){
-			$scope.arrowPosition[arrow][6]='#333';
-		}
-*/
 		$scope.arrowPosition = colorPath(a.ele.Name,$scope.arrowPosition,0);
 
 	}
@@ -70,6 +68,7 @@ var mainController = ['$scope', function ( $scope ) {
 			$scope.arrowPosition[arrow][6]='#afafaf';
 		}
 	}
+
 }];
 
 
@@ -155,7 +154,8 @@ function splitObject(matrix){
 			}
 			if(f>0){
 				found = jQuery.inArray(matrix[ele][f-1].qText+"^"+matrix[ele][f].qText, arrowsMatrix);			
-				if (found == -1) {
+				if ((found == -1) && ((matrix[ele][f-1].qText != "-") || (matrix[ele][f].qText != "-")) ) {
+				//	console.log(matrix[ele][f-1].qText+" <<< ---- >>>>"+matrix[ele][f].qText);
 					arrowsMatrix.push(matrix[ele][f-1].qText+"^"+matrix[ele][f].qText);
 				}
 			}
@@ -206,13 +206,13 @@ function makeArrowsPosition(arrows, elements){
 	var links = [];
 
 	for (var i = 0, len = elements.length; i < len; i++) {
-		console.log(elements[i]);
+	//	console.log(elements[i]);
 	    lookup[elements[i].Name] = {'backPoint' : elements[i]['backPoint'], 'forwardPoint':elements[i]['forwardPoint'],'Node':elements[i].Name,'Level':elements[i].Level};
 	}
 //	console.log("Lookup");
 //	console.log(lookup);
 
-	console.log(arrows);
+//	console.log(arrows);
 	for(arrow in arrows){
 		var Ele=arrows[arrow].split("^");
 		var EleFrom=Ele[0];
@@ -231,10 +231,10 @@ function makeArrowsPosition(arrows, elements){
 		{
 
 				EleTo=arrows[4].split("^")[1];
-				console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
+		//		console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
 		}
 		if(((EleTo != '-') && (EleFrom != '-')) || (arrow == 3)) {
-			console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
+		//	console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
 			nuoveCoord = calcoloNuovoPuntoFinale(lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, lookup[EleTo].backPoint.wPos,  lookup[EleTo].backPoint.hPos);
 			var x = nuoveCoord[0];
 			var y = nuoveCoord[1];
@@ -246,7 +246,7 @@ function makeArrowsPosition(arrows, elements){
 
 	}
 
-	//console.log(links);
+	console.log(links);
 	return(links);
 }
 
@@ -354,6 +354,7 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 
 			element['hPos'] = (countH * hDistance[ele])+marginTop;
 			element['wPos'] = ((countW * wDistance) + marginLeft);
+			
 
 			// BackPoint attach
 			backPoint['hPos'] = element['hPos']+15;
@@ -378,6 +379,6 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 		countW +=1;
 
 	}
-	//console.log(elements);
+	console.log(elements);
 	return elements;
 }
