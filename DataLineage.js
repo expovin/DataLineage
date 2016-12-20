@@ -136,7 +136,6 @@ define( [	"qlik",
 
 
 				function funLvl4Data(reply, app){
-						console.log(reply);
 						makeAdditionalInfo(reply,function(replay){
 							addInfosArray.push(replay);
 							me.app.createCube(varLvl5Data,funLvl5Data);

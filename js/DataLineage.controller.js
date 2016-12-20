@@ -10,29 +10,29 @@ var mainController = ['$scope', function ( $scope ) {
 		var Field='Lineage Level '+this.ele.Level;
 
 			switch(this.ele.Level){
-				case 1:
+				case 0:
 					Field="libName";					
 					break;
-				case 2:
+				case 1:
 					Field="[Document Id]";
 					break;	
-				case 3:
+				case 2:
 					Field="[%KeyTable]";
 					break;
-				case "Lineage Level 4":
+				case 3:
 					Field="[Field Id]";
 					break;
-				case 5:
+				case 4:
 					Field="[%KeyLibraryObjectUsage]";
 					break;	
 
-				case 6:
+				case 5:
 					Field="[Sheet Id]";
 					break;
-				case "Lineage Level 7":
+				case 6:
 					Field="[Sheet Object Id]";
 					break;	
-				case "Lineage Level 8":
+				case 7:
 					Field="[Story Id]";
 					break;					
 			}		
@@ -48,9 +48,6 @@ var mainController = ['$scope', function ( $scope ) {
 
 
 	$scope.writeTable = function(a){
-
-		console.log( $scope.MoreInfo);
-		console.log("Level :"+a.ele.Level+" Name :"+a.ele.Name);
 	//	console.log( $scope.arrowPosition);
 		$scope.Table.ObjName = $scope.MoreInfo[a.ele.Level][a.ele.Name].Title || "No Title";
 		$scope.AddInfo = $scope.MoreInfo[a.ele.Level][a.ele.Name];
@@ -245,8 +242,6 @@ function makeArrowsPosition(arrows, elements){
 
 
 	}
-
-	console.log(links);
 	return(links);
 }
 
@@ -317,7 +312,6 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 					case "Lineage Level 4":
 						element['icon'] = "/extensions/datalineage/img/Field.PNG";
 						element['Level'] = 3;
-						console.log(Elements[ele][field]);
 						break;
 					case "Lineage Level 5":
 					//	console.log("RVR look!", element['Name'].substring(0,1));
@@ -382,6 +376,5 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 		countW +=1;
 
 	}
-	console.log(elements);
 	return elements;
 }
