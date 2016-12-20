@@ -12,10 +12,10 @@ var varLvl2Data =	{
 					"Document Id"
 				]
 			},
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -29,10 +29,10 @@ var varLvl2Data =	{
 					"Document Name"
 				]
 			},
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -46,10 +46,10 @@ var varLvl2Data =	{
 					"Document Owner by Username"
 				]
 			},
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -63,10 +63,10 @@ var varLvl2Data =	{
 					"Document Published Date"
 				]
 			},
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -131,8 +131,8 @@ var varLvl2Data =	{
 			}
 		}
 	],
-	"qSuppressZero": true,
-	"qSuppressMissing": true,
+	"qSuppressZero": false,
+	"qSuppressMissing": false,
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"

@@ -9,10 +9,10 @@ var varLvl6Data = {
 		{
 			"qLabel": "Lineage Level 6",
 			"qLibraryId": "pCmjJmJ",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -26,10 +26,10 @@ var varLvl6Data = {
 					"Sheet Title"
 				]
 			},
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -43,10 +43,10 @@ var varLvl6Data = {
 					"Sheet Id"
 				]
 			},
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -60,10 +60,10 @@ var varLvl6Data = {
 					"Sheet Description"
 				]
 			},
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -77,10 +77,10 @@ var varLvl6Data = {
 					"Sheet Owner by Username"
 				]
 			},
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -94,10 +94,10 @@ var varLvl6Data = {
 					"Sheet Published"
 				]
 			},
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -107,8 +107,8 @@ var varLvl6Data = {
 		}
 	],
 	"qMeasures": [],
-	"qSuppressZero": true,
-	"qSuppressMissing": true,
+	"qSuppressZero": false,
+	"qSuppressMissing": false,
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"

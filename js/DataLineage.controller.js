@@ -292,90 +292,93 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 		for(var field in Elements[ele]) {
 			backPoint=[];
 			forwardPoint=[];
-			if(Elements[ele][field] == '-')
-				console.log("Trovato Elemento nullo :"+Elements[ele][field]);
+			if(Elements[ele][field] == '-'){
+				console.log("Trovato Elemento nullo :");
+
+			}
 			else
 			{
-			element['Name'] = Elements[ele][field];
+				element['Name'] = Elements[ele][field];
+
+				
+				switch(qDimensionInfo[ele].qFallbackTitle){
+					case "Lineage Level 1":
+						element['icon'] = "/extensions/datalineage/img/Source.PNG";
+						element['Level'] = 0;
+						break;
+					case "Lineage Level 2":
+						element['icon'] = "/extensions/datalineage/img/QlikSenseApp.PNG";
+						element['Level'] = 1;
+						break;	
+					case "Lineage Level 3":
+						element['icon'] = "/extensions/datalineage/img/Table.PNG";
+						element['Level'] = 2;
+						break;
+					case "Lineage Level 4":
+						element['icon'] = "/extensions/datalineage/img/Field.PNG";
+						element['Level'] = 3;
+						console.log(Elements[ele][field]);
+						break;
+					case "Lineage Level 5":
+					//	console.log("RVR look!", element['Name'].substring(0,1));
+						element['Level'] = 4;
+					    if(element['Name'].substring(0,1)=="D") 
+							{
+								element['icon'] = "/extensions/datalineage/img/Dimension.PNG";
+							//	console.log("should pain dim");
+							}
+						else if (element['Name'].substring(0,1)=="M") 
+							{
+								element['icon'] = "/extensions/datalineage/img/Expression.PNG";
+							//	console.log("should pain measure");
+							}
+						else// (element['Name'].substring(0,1)=="V") 
+							{
+								element['icon'] = "/extensions/datalineage/img/ItemLibrary.PNG";
+							//	console.log("should pain viz");
+							}
+						break;	
+
+					case "Lineage Level 6":
+						element['icon'] = "/extensions/datalineage/img/Sheet.PNG";
+						element['Level'] = 5;
+						break;
+					case "Lineage Level 7":
+						element['icon'] = "/extensions/datalineage/img/Visualization.PNG";
+						element['Level'] = 6;
+						break;	
+					case "Lineage Level 8":
+						element['icon'] = "/extensions/datalineage/img/StoryVisualization.PNG";
+						element['Level'] = 7;
+						break;					
+				}			
 
 			
-			switch(qDimensionInfo[ele].qFallbackTitle){
-				case "Lineage Level 1":
-					element['icon'] = "/extensions/datalineage/img/Source.PNG";
-					element['Level'] = 0;
-					break;
-				case "Lineage Level 2":
-					element['icon'] = "/extensions/datalineage/img/QlikSenseApp.PNG";
-					element['Level'] = 1;
-					break;	
-				case "Lineage Level 3":
-					element['icon'] = "/extensions/datalineage/img/Table.PNG";
-					element['Level'] = 2;
-					break;
-				case "Lineage Level 4":
-					element['icon'] = "/extensions/datalineage/img/Field.PNG";
-					element['Level'] = 3;
-					break;
-				case "Lineage Level 5":
-				//	console.log("RVR look!", element['Name'].substring(0,1));
-					element['Level'] = 4;
-				    if(element['Name'].substring(0,1)=="D") 
-						{
-							element['icon'] = "/extensions/datalineage/img/Dimension.PNG";
-						//	console.log("should pain dim");
-						}
-					else if (element['Name'].substring(0,1)=="M") 
-						{
-							element['icon'] = "/extensions/datalineage/img/Expression.PNG";
-						//	console.log("should pain measure");
-						}
-					else// (element['Name'].substring(0,1)=="V") 
-						{
-							element['icon'] = "/extensions/datalineage/img/ItemLibrary.PNG";
-						//	console.log("should pain viz");
-						}
-					break;	
 
-				case "Lineage Level 6":
-					element['icon'] = "/extensions/datalineage/img/Sheet.PNG";
-					element['Level'] = 5;
-					break;
-				case "Lineage Level 7":
-					element['icon'] = "/extensions/datalineage/img/Visualization.PNG";
-					element['Level'] = 6;
-					break;	
-				case "Lineage Level 8":
-					element['icon'] = "/extensions/datalineage/img/StoryVisualization.PNG";
-					element['Level'] = 7;
-					break;					
-			}			
+				element['hPos'] = (countH * hDistance[ele])+marginTop;
+				element['wPos'] = ((countW * wDistance) + marginLeft);
+				
 
-			
+				// BackPoint attach
+				backPoint['hPos'] = element['hPos']+15;
+				backPoint['wPos'] = element['wPos'];
+				element['backPoint']=backPoint;
 
-			element['hPos'] = (countH * hDistance[ele])+marginTop;
-			element['wPos'] = ((countW * wDistance) + marginLeft);
-			
+				//forwardPoint
+				forwardPoint['hPos'] = element['hPos']+15
+				forwardPoint['wPos'] = element['wPos']+35;
+				element['forwardPoint']=forwardPoint;
 
-			// BackPoint attach
-			backPoint['hPos'] = element['hPos']+15;
-			backPoint['wPos'] = element['wPos'];
-			element['backPoint']=backPoint;
-
-			//forwardPoint
-			forwardPoint['hPos'] = element['hPos']+15
-			forwardPoint['wPos'] = element['wPos']+35;
-			element['forwardPoint']=forwardPoint;
-
-			elements.push(element);
-			
-			
-			//console.log('countH :'+countH+' countW:'+countW);
-			//console.log(element);
-			element={};
-			countH +=1;
-		}
+				elements.push(element);
+				
+				
+				//console.log('countH :'+countH+' countW:'+countW);
+				//console.log(element);
+				element={};
+				countH +=1;
+			}
 		
-	}
+		}
 		countW +=1;
 
 	}

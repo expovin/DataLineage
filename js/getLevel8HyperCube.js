@@ -9,10 +9,10 @@ var varLvl8Data = {
 		{
 			"qLabel": "Lineage Level 8",
 			"qLibraryId": "db7a1f37-050c-4c1f-b15f-0beb61fa5fc4",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -23,10 +23,10 @@ var varLvl8Data = {
 		{
 			"qLabel": "Story Title",
 			"qLibraryId": "TVsmfEY",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -37,10 +37,10 @@ var varLvl8Data = {
 		{
 			"qLabel": "Story Description",
 			"qLibraryId": "6192e4fd-dd6a-485c-a3b5-06f5dd3ce6f0",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -51,10 +51,10 @@ var varLvl8Data = {
 		{
 			"qLabel": "Story Owner",
 			"qLibraryId": "dXvFJ",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -65,10 +65,10 @@ var varLvl8Data = {
 		{
 			"qLabel": "Story Published",
 			"qLibraryId": "YVFGH",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -78,8 +78,8 @@ var varLvl8Data = {
 		}
 	],
 	"qMeasures": [],
-	"qSuppressZero": true,
-	"qSuppressMissing": true,
+	"qSuppressZero": false,
+	"qSuppressMissing": false,
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"

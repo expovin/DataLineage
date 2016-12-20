@@ -9,10 +9,10 @@ var varLvl7Data = {
 		{
 			"qLabel": "Lineage Level 7",
 			"qLibraryId": "sPypP",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -23,10 +23,10 @@ var varLvl7Data = {
 		{
 			"qLabel": "Sheet Object Title",
 			"qLibraryId": "aewpFf",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -40,10 +40,10 @@ var varLvl7Data = {
 					"[Sheet Object Visualization Type]&:\":\"&[Sheet Object Type]"
 				]
 			},
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -72,8 +72,8 @@ var varLvl7Data = {
 			}
 		}
 	],
-	"qSuppressZero": true,
-	"qSuppressMissing": true,
+	"qSuppressZero": false,
+	"qSuppressMissing": false,
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"

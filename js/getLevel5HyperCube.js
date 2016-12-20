@@ -9,10 +9,10 @@ var varLvl5Data = {
 		{
 			"qLabel": "Lineage Level 5",
 			"qLibraryId": "MJM",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -23,10 +23,10 @@ var varLvl5Data = {
 		{
 			"qLabel": "Library Title",
 			"qLibraryId": "ggkjvmt",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -37,10 +37,10 @@ var varLvl5Data = {
 		{
 			"qLabel": "Library Type",
 			"qLibraryId": "bb5941cd-da8a-4436-a617-cf06fe0a3846",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -51,10 +51,10 @@ var varLvl5Data = {
 		{
 			"qLabel": "Library Description",
 			"qLibraryId": "d7ae04a9-9744-4420-84eb-a55ba863fd47",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -65,10 +65,10 @@ var varLvl5Data = {
 		{
 			"qLabel": "Library Id",
 			"qLibraryId": "AzVePU",
-			"qNullSuppression": true,
+			"qNullSuppression": false,
 			"qOtherTotalSpec": {
 				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": true,
+				"qSuppressOther": false,
 				"qOtherSortMode": "OTHER_SORT_DESCENDING",
 				"qOtherCounted": {
 					"qv": "5"
@@ -115,8 +115,8 @@ var varLvl5Data = {
 			}
 		}
 	],
-	"qSuppressZero": true,
-	"qSuppressMissing": true,
+	"qSuppressZero": false,
+	"qSuppressMissing": false,
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"

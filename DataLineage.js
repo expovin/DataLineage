@@ -30,7 +30,7 @@ define( [	"qlik",
 		$( '<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">' ).appendTo( 'body' ); // Bootstrap.js CDN
 
 		var AdditionalInfo=[];
-		var flagFirstPaintExecution=0;
+		var flagPageRafrash=false;
 		var call=0
 		var me = {
 			template: template,
@@ -90,96 +90,90 @@ define( [	"qlik",
 
 		me.init = function(){
 
-			console.log("Init");
+			
+			flagPageRafrash = true;
+			console.log("Init, Page Refresh :"+flagPageRafrash);
 		};
 
 		me.paint = function($element,layout) {
 
 			
 			var _this=this;
-			_this.$scope.MoreInfo=[];
+			var addInfosArray = [];
+		//	_this.$scope.MoreInfo=[];
 
 			var Metadata = splitObject(layout.qHyperCube.qDataPages[0].qMatrix);
 			
-			me.app.createCube(varLvl1Data,funLvl1Data);
 			
+			
+			console.log("Paint, Page Refresh :"+flagPageRafrash);
+			if(!flagPageRafrash) {
+				console.log("Recupero i dati addizionali");
+				console.log(addInfosArray); 
 
-			function funLvl1Data(reply, app){
+				me.app.createCube(varLvl1Data,funLvl1Data);
 
-					makeAdditionalInfo(reply,function(replay){
-						//AdditionalInfo.push(replay);
-						_this.$scope.MoreInfo.push(replay);
-						me.app.createCube(varLvl2Data,funLvl2Data);
-					});	
-			}	
+				function funLvl1Data(reply, app){
+						makeAdditionalInfo(reply,function(replay){
+							addInfosArray.push(replay);
+							me.app.createCube(varLvl2Data,funLvl2Data);
+						});	
+				}	
 
-			function funLvl2Data(reply, app){
+				function funLvl2Data(reply, app){
+						makeAdditionalInfo(reply,function(replay){
+							addInfosArray.push(replay);
+							me.app.createCube(varLvl3Data,funLvl3Data);
+						});	
+				}	
 
-					makeAdditionalInfo(reply,function(replay){
-						//AdditionalInfo.push(replay);
-						_this.$scope.MoreInfo.push(replay);
-						me.app.createCube(varLvl3Data,funLvl3Data);
-					});	
-			}	
+				function funLvl3Data(reply, app){
+						makeAdditionalInfo(reply,function(replay){
+							addInfosArray.push(replay);
+							me.app.createCube(varLvl4Data,funLvl4Data);
+						});
+				}
 
-			function funLvl3Data(reply, app){
 
-					makeAdditionalInfo(reply,function(replay){
-						_this.$scope.MoreInfo.push(replay);
-						me.app.createCube(varLvl4Data,funLvl4Data);
+				function funLvl4Data(reply, app){
+						console.log(reply);
+						makeAdditionalInfo(reply,function(replay){
+							addInfosArray.push(replay);
+							me.app.createCube(varLvl5Data,funLvl5Data);
+						});
+				}	
 
-					});
-					
+				function funLvl5Data(reply, app){
+						makeAdditionalInfo(reply,function(replay){
+							addInfosArray.push(replay);
+							me.app.createCube(varLvl6Data,funLvl6Data);
+						});
+				}
 
-			}	
+				function funLvl6Data(reply, app){
+						makeAdditionalInfo(reply,function(replay){
+							addInfosArray.push(replay);
+							me.app.createCube(varLvl7Data,funLvl7Data);
+						});
+				}
 
-			function funLvl4Data(reply, app){
 
-					makeAdditionalInfo(reply,function(replay){
-						_this.$scope.MoreInfo.push(replay);
-						me.app.createCube(varLvl5Data,funLvl5Data);
+				function funLvl7Data(reply, app){
+						makeAdditionalInfo(reply,function(replay){
+							addInfosArray.push(replay);
+							me.app.createCube(varLvl8Data,funLvl8Data);
+						});
+				}
 
-					});
+				function funLvl8Data(reply, app){
+						makeAdditionalInfo(reply,function(replay){
+							addInfosArray.push(replay);
+						});	
+				}
 
-			}	
-
-			function funLvl5Data(reply, app){
-
-					makeAdditionalInfo(reply,function(replay){
-						_this.$scope.MoreInfo.push(replay);
-					//	console.log(_this.$scope.MoreInfo);
-						me.app.createCube(varLvl6Data,funLvl6Data);
-					});
-
+				_this.$scope.MoreInfo = addInfosArray;
 			}
 
-			function funLvl6Data(reply, app){
-
-					makeAdditionalInfo(reply,function(replay){
-						_this.$scope.MoreInfo.push(replay);
-					//	console.log(_this.$scope.MoreInfo);
-						me.app.createCube(varLvl7Data,funLvl7Data);
-					});
-
-			}
-
-			function funLvl7Data(reply, app){
-
-					makeAdditionalInfo(reply,function(replay){
-						_this.$scope.MoreInfo.push(replay);
-			//			console.log(_this.$scope.MoreInfo);
-						me.app.createCube(varLvl8Data,funLvl8Data);
-					});
-			}
-
-			function funLvl8Data(reply, app){
-
-					makeAdditionalInfo(reply,function(replay){
-						_this.$scope.MoreInfo.push(replay);
-				//		console.log(_this.$scope.MoreInfo);
-					});
-				
-			}
 
 			this.$scope.realSize = getElementContentWidth(document.getElementById("Line"));
 			this.$scope.elePosition = makeElementPosition(this.$scope.realSize, Metadata[0], layout.settings,layout.qHyperCube.qDimensionInfo);
@@ -190,6 +184,7 @@ define( [	"qlik",
 			if ( !this.$scope.table ) {
 				this.$scope.table = qlik.table( this );
 			}
+			flagPageRafrash = false;
 			return qlik.Promise.resolve();	
 
 			
