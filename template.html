@@ -30,7 +30,7 @@
 
         <g ng-repeat="ele in elePosition">
 
-         <image xlink:href="{{ele.icon}}"  x="{{ele.wPos}}" y="{{ele.hPos}}" 
+         <image xlink:href="{{ele.icon}}"  ng-x="{{ele.wPos}}" y="{{ele.hPos}}" 
                                             height="30px" width="30px" 
                                             ng-mouseover="writeTable(this)" 
                                             ng-mouseout="cleanTable(this)"

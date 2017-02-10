@@ -14,10 +14,7 @@ define( [	"qlik",
 			"./js/getLevel5HyperCube",
 			"./js/getLevel6HyperCube",
 			"./js/getLevel7HyperCube",
-			"./js/getLevel8HyperCube",
-				// Bootstrap File
-			//"./bootstrap-3.3.7-dist/js/bootstrap",
-			//"text!./bootstrap-3.3.7-dist/css/bootstrap.min.css"	
+			"./js/getLevel8HyperCube"
 						
 		],
 	function ( qlik, $, template, boot,cssContent ) {
@@ -26,8 +23,8 @@ define( [	"qlik",
 		$( '<style>' ).html( boot ).appendTo( 'head' ); // Adding scoped bootstrap to head			
 		$( '<style>' ).html( cssContent ).appendTo( 'head' ); // Adding scopped style to head					
 		$( '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">' ).appendTo( 'head' ); // Font Awesome CDN		
-		$( '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">' ).appendTo( 'head' ); // Font Awesome CDN		
-		$( '<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">' ).appendTo( 'body' ); // Bootstrap.js CDN
+		$( '<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">' ).appendTo( 'head' ); // Font Awesome CDN		
+		$( '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>' ).appendTo( 'body' ); // Bootstrap.js CDN
 
 		var AdditionalInfo=[];
 		var flagPageRafrash=false;
@@ -191,5 +188,13 @@ define( [	"qlik",
 		};		
 
 		return me;
-	});
+	})
+
+    .directive('ngX', function() {
+        return function(scope, element, attrs) {
+            scope.$watch(attrs.ngX, function(value) {
+            	console.log("Sono nella direttiva custom");
+                element.attr('x', value);
+            });
+        }});
 
