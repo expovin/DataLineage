@@ -22,15 +22,15 @@
           </marker>
 
         <g ng-repeat="arrow in arrowPosition">
-          <line class="linkBetweenObj"  x1="{{arrow[0]}}" y1="{{arrow[1]}}" 
-                                        x2="{{arrow[2]}}" y2="{{arrow[3]}}"  
+          <line class="linkBetweenObj"  ng-x1="{{arrow[0]}}" ng-y1="{{arrow[1]}}" 
+                                        ng-x2="{{arrow[2]}}" ng-y2="{{arrow[3]}}"  
                                         marker-end="url(#freccia)"
                                         stroke-width="1.5" stroke="{{arrow[6]}}"/>
         </g>
 
         <g ng-repeat="ele in elePosition">
 
-         <image xlink:href="{{ele.icon}}"  ng-x="{{ele.wPos}}" y="{{ele.hPos}}" 
+         <image xlink:href="{{ele.icon}}"   ng-x="{{ele.wPos}}" ng-y="{{ele.hPos}}" 
                                             height="30px" width="30px" 
                                             ng-mouseover="writeTable(this)" 
                                             ng-mouseout="cleanTable(this)"

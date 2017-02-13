@@ -1,4 +1,4 @@
-        .factory('dataLineageFactory',[function($resource,CONFIG) {          
+    .factory('dataLineageFactory',[function($resource,CONFIG) {          
 
             var lineage = {};
 
@@ -6,13 +6,8 @@
 
                 return lineage;
 
-        }])     
+    }])   
+
+
    
 ;
-
-
-
-function greeting(time){
-	console.log("Ciao Vincenzo");
-	return ("Buon "+time+" Vincenzo");
-}

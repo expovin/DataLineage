@@ -2,6 +2,7 @@ define( [	"qlik",
 			"jquery",
 			"text!./template.html",
 			"text!./css/myStyle.css",
+			"./js/CustomDirective",
 		//	"./js/DataLineage.Services",
 			"./js/DataLineage.controller",
 			"./js/settings/GeneralSettings",						// Variable with the General settings
@@ -188,13 +189,5 @@ define( [	"qlik",
 		};		
 
 		return me;
-	})
-
-    .directive('ngX', function() {
-        return function(scope, element, attrs) {
-            scope.$watch(attrs.ngX, function(value) {
-            	console.log("Sono nella direttiva custom");
-                element.attr('x', value);
-            });
-        }});
+	});
 
