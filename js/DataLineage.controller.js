@@ -265,15 +265,9 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 	var imgHeight = height - marginTop - marginBottom;
 	var imgWidth = width - marginRight - marginLeft;
 
-//	console.log(Elements);
-
-	//console.log("width :"+width+" width:"+width+" marginRight:"+marginRight+" marginLeft"+marginLeft);
-
 
 	wDistance = imgWidth / Elements.length;
 
-	//console.log("wDistance = "+wDistance+" imgWidth : "+imgWidth+" Elements.length :"+Elements.length);
-	//console.log("marginRight : "+marginRight);
 	for(ele in Elements){
 		hDistance[ele] = imgHeight / Elements[ele].length;
 	}
@@ -366,9 +360,6 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 
 				elements.push(element);
 				
-				
-				//console.log('countH :'+countH+' countW:'+countW);
-				//console.log(element);
 				element={};
 				countH +=1;
 			}

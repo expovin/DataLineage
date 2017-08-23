@@ -98,24 +98,26 @@ define( [	"qlik",
 
 			
 			flagPageRafrash = true;
-			console.log("Init, Page Refresh :"+flagPageRafrash);
+			//console.log("Init, Page Refresh :"+flagPageRafrash);
 		};
 
 		me.paint = function($element,layout) {
 
-			
+			this.$scope.numOfElements = layout.qHyperCube.qDataPages[0].qMatrix.length;
+
 			var _this=this;
 			var addInfosArray = [];
 		//	_this.$scope.MoreInfo=[];
 
+		this.$scope.limits = layout.settings.image.limits;
+
+		if(layout.qHyperCube.qDataPages[0].qMatrix.length < layout.settings.image.limits.maxObjs){
+
 			var Metadata = splitObject(layout.qHyperCube.qDataPages[0].qMatrix);
 			
 			
-			
-			console.log("Paint, Page Refresh :"+flagPageRafrash);
+			//console.log("Paint, Page Refresh :"+flagPageRafrash);
 			if(!flagPageRafrash) {
-				console.log("Recupero i dati addizionali");
-				console.log(addInfosArray); 
 
 				me.app.createCube(varLvl1Data,funLvl1Data);
 
@@ -179,8 +181,14 @@ define( [	"qlik",
 				_this.$scope.MoreInfo = addInfosArray;
 			}
 
+		}
+		else {
+			console.log(this.$scope.numOfElements," are too much elements to drow. Please make a selection!");
+			
+		}
 
-			this.$scope.realSize = getElementContentWidth(document.getElementById("Line"));
+			this.$scope.realSize = getElementContentWidth(document.getElementById("ExtObj_Container"));
+			console.log(this.$scope.realSize);
 			this.$scope.elePosition = makeElementPosition(this.$scope.realSize, Metadata[0], layout.settings,layout.qHyperCube.qDimensionInfo);
 			this.$scope.arrowPosition = makeArrowsPosition(Metadata[1],this.$scope.elePosition);
 			this.$scope.QlikApp =  qlik.currApp();
