@@ -7,9 +7,12 @@ rect.path{
 	position: absolute;
 	bottom: 0;
 	right: 30;
-/*	width: 200px;*/
-	background-color: #fff;
-	opacity: 0.9;
+/*	width: 200px;
+    height: 100%;
+	width: 100%;
+	*/
+	background-color: #ccc;
+	opacity: 1;
 }
 
 collapseLinkInfo {

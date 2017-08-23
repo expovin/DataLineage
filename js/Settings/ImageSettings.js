@@ -55,15 +55,15 @@ var imageSettings = {
 							type: "string",
 							expression: "optional",
 							label: "Warning Title",
-							defaultValue: "Please make more selections",
+							defaultValue: "Dataset too large",
 							ref: "settings.image.limits.warnTitle"
 						},
 						MyTextarea: {
 							label:"Warning Text",
 							component: "textarea",
 							rows: 7,//the amount of rows in the textarea component (default is 3)
-							maxlength: 100,//will not allow more than 100 characters
-							defaultValue: "Please consider to reduce the number of objects in your selection. A bug number of objects deal to hight hardware resource consumption",
+							maxlength: 200,//will not allow more than 100 characters
+							defaultValue: "Please consider to reduce the number of objects making more selections. A large number of objects lead to a greater memory consumption and it is far less readable.",
 							ref: "settings.image.limits.warnText"
 						}
 					
