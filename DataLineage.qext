@@ -1,14 +1,14 @@
 {
-	"name": "DataLineage",
-	"description": "Basic empty visualization template based on angular.js",
-	"type": "visualization",
-	"version": "1.0.0",
-	"author": "",
-	"homepage": "",
-	"keywords": "qlik-sense, visualization",
-	"license": "",
-	"repository": "",
-	"dependencies": {
-		"qlik-sense": ">=3.0.x"
-	}
+    "name": "DataLineage",
+    "description": "Visual representation of lineage path for qlik sense applications, from their source up to their stories",
+    "type": "visualization",
+    "version": "1.0.0",
+    "author": "Vincenzo Esposito",
+    "homepage": "",
+    "keywords": "qlik-sense, visualization, lineage",
+    "license": "",
+    "repository": "",
+    "dependencies": {
+        "qlik-sense": ">=3.0.x"
+    }
 }

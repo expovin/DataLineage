@@ -112,4 +112,4 @@ var myHyperCube =  {
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"
-	}
+}

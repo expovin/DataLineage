@@ -1,124 +1,71 @@
-var varLvl4Data = {
+var varLvl4Data =	{
 	"qInitialDataFetch": [
 		{
-			"qHeight": 20,
-			"qWidth": 7
+			"qHeight": 1000,
+			"qWidth": 6
 		}
 	],
 	"qDimensions": [
 		{
-			"qLabel": "Lineage Level 4",
-			"qLibraryId": "HnZjZ",
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
+			"qDef": {
+				"qFieldDefs": [
+					"Field Id"
+				],
+			    "qFieldLabels": [
+			      "Field Id"
+			    ]
+			},
+			"qNullSuppression": true
 		},
 		{
-			"qLabel": "Field Name",
-			"qLibraryId": "cAUgYE",
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
+			"qDef": {
+				"qFieldDefs": [
+					"Field Name"
+				],
+			    "qFieldLabels": [
+			      "Title"
+			    ],
+			    "qSortCriterias": [
+			      {
+			        "qSortByAscii": 1
+			      }
+			    ]
+			},
+			"qNullSuppression": true
 		},
 		{
-			"qLabel": "Library Type",
-			"qLibraryId": "bb5941cd-da8a-4436-a617-cf06fe0a3846",
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
-		},
-		{
-			"qLabel": "Library Description",
-			"qLibraryId": "d7ae04a9-9744-4420-84eb-a55ba863fd47",
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
-		},
-		{
-			"qLabel": "Library Id",
-			"qLibraryId": "AzVePU",
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
+			"qDef": {
+				"qFieldDefs": [
+					"Table Name"
+				]
 			}
 		}
 	],
 	"qMeasures": [
 		{
 			"qDef": {
-				"qDef": "Count([Field Name])"
+				"qDef": "Max([Field Total Distinct Values])",
+				"qLabel": "Distinct Values"
 			},
-			"qLabel": "Count([Field Name])",
 			"qLibraryId": null,
 			"qSortBy": {
-				"qSortByState": 0,
-				"qSortByFrequency": 0,
-				"qSortByNumeric": 0,
-				"qSortByAscii": 1,
-				"qSortByLoadOrder": 0,
-				"qSortByExpression": 0,
-				"qExpression": {
-					"qv": " "
-				}
+				"qSortByNumeric": 1
 			}
 		},
 		{
 			"qDef": {
-				"qDef": "Max([Field Total Distinct Values])"
+				"qDef": "Sum([Field Number of Rows])",
+				"qLabel": "Total Rows"
 			},
-			"qLabel": "Max([Field Total Distinct Values])",
 			"qLibraryId": null,
 			"qSortBy": {
-				"qSortByState": 0,
-				"qSortByFrequency": 0,
-				"qSortByNumeric": 0,
-				"qSortByAscii": 1,
-				"qSortByLoadOrder": 0,
-				"qSortByExpression": 0,
-				"qExpression": {
-					"qv": " "
-				}
+				"qSortByNumeric": 1
 			}
 		}
-
 	],
 	"qSuppressZero": false,
 	"qSuppressMissing": false,
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"
-	}
+}

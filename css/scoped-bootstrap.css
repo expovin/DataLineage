@@ -1442,7 +1442,7 @@ a.bootstrap_inside .bg-danger:focus {
 @media (min-width: 768px) {
   .bootstrap_inside .dl-horizontal dt {
     float: left;
-    width: 160px;
+    width: 60px;
     clear: left;
     text-align: right;
     overflow: hidden;

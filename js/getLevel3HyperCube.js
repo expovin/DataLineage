@@ -1,94 +1,51 @@
 var varLvl3Data = {
 	"qInitialDataFetch": [
 		{
-			"qHeight": 20,
+			"qHeight": 1000,
 			"qWidth": 5
 		}
 	],
 	"qDimensions": [
 		{
-			"qLabel": "Lineage Level 3",
-			"qLibraryId": "UQJuZm",
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
+			"qDef": {
+				"qFieldDefs": [
+					"%KeyTable"
+				]
+			},
+			"qNullSuppression": true
 		},
 		{
 			"qDef": {
 				"qFieldDefs": [
 					"Table Name"
-				]
+				],
+			    "qFieldLabels": [
+			      "Title"
+			    ],
+			    "qSortCriterias": [
+			      {
+			        "qSortByAscii": 1
+			      }
+			    ]
 			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
+			"qNullSuppression": true
 		},
 		{
 			"qDef": {
 				"qFieldDefs": [
 					"statementSource"
-				]
-			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
-		},
-		{
-			"qDef": {
-				"qFieldDefs": [
-					"statement"
-				]
-			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
+				],
+			    "qFieldLabels": [
+			      "Lib Statement Source"
+			    ]
 			}
 		}
 	],
 	"qMeasures": [
 		{
 			"qDef": {
-				"qDef": "Sum([Table Number of Rows])"
-			},
-			"qLabel": "Sum([Table Number of Rows])",
-			"qLibraryId": null,
-			"qSortBy": {
-				"qSortByState": 0,
-				"qSortByFrequency": 0,
-				"qSortByNumeric": 0,
-				"qSortByAscii": 1,
-				"qSortByLoadOrder": 0,
-				"qSortByExpression": 0,
-				"qExpression": {
-					"qv": " "
-				}
+				"qDef": "Sum([Table Number of Rows])",
+				"qLabel": "Number of Rows"
 			}
 		}
 	],
@@ -97,4 +54,4 @@ var varLvl3Data = {
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"
-	}
+}
