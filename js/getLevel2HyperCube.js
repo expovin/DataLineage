@@ -1,8 +1,8 @@
 var varLvl2Data =	{
 	"qInitialDataFetch": [
 			{
-			"qHeight": 200,
-			"qWidth": 7
+			"qHeight": 1000,
+			"qWidth": 8
 		}
 	],
 	"qDimensions": [
@@ -12,122 +12,71 @@ var varLvl2Data =	{
 					"Document Id"
 				]
 			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
+			"qNullSuppression": false
 		},
 		{
 			"qDef": {
 				"qFieldDefs": [
 					"Document Name"
-				]
+				],
+			    "qFieldLabels": [
+			      "Title"
+			    ],
+			    "qSortCriterias": [
+			      {
+			        "qSortByAscii": 1
+			      }
+			    ]
 			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
+			"qNullSuppression": true
+		},
+		{
+			"qDef": {
+				"qFieldDefs": [
+					"Document Owner by UserId"
+				]
 			}
 		},
 		{
 			"qDef": {
 				"qFieldDefs": [
-					"Document Owner by Username"
+					"Stream Name"
 				]
-			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
-		},
-		{
-			"qDef": {
-				"qFieldDefs": [
-					"Document Published Date"
-				]
-			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
 			}
 		}
 	],
 	"qMeasures": [
 		{
 			"qDef": {
-				"qDef": "Count(distinct [Application User])"
+				"qDef": "if([Document Published Date]<>'1/1/1753', [Document Published Date],'Not Published')",
+				"qLabel": "Published Date"
 			},
-			"qLabel": "Number of Users",
-			"qLibraryId": null,
 			"qSortBy": {
-				"qSortByState": 0,
-				"qSortByFrequency": 0,
-				"qSortByNumeric": 0,
-				"qSortByAscii": 1,
-				"qSortByLoadOrder": 0,
-				"qSortByExpression": 0,
-				"qExpression": {
-					"qv": " "
-				}
+				"qSortByNumeric": 1
 			}
 		},
 		{
 			"qDef": {
-				"qDef": "Sum([Document File Size])"
+				"qDef": "num(sum([Document File Size])/1048576,'#,##0.00')&' Mb'",
+				"qLabel": "Application Size"
 			},
-			"qLabel": "Document File Size",
-			"qLibraryId": null,
 			"qSortBy": {
-				"qSortByState": 0,
-				"qSortByFrequency": 0,
-				"qSortByNumeric": 0,
-				"qSortByAscii": 1,
-				"qSortByLoadOrder": 0,
-				"qSortByExpression": 0,
-				"qExpression": {
-					"qv": " "
-				}
+				"qSortByNumeric": 1
 			}
 		},
 		{
 			"qDef": {
-				"qDef": "Sum([Table Number of Rows])"
+				"qDef": "Count(distinct [Application User])",
+				"qLabel": "Number of Users with Access"
 			},
-			"qLabel": "Number of Rows",
-			"qLibraryId": null,
 			"qSortBy": {
-				"qSortByState": 0,
-				"qSortByFrequency": 0,
-				"qSortByNumeric": 0,
-				"qSortByAscii": 1,
-				"qSortByLoadOrder": 0,
-				"qSortByExpression": 0,
-				"qExpression": {
-					"qv": " "
-				}
+				"qSortByNumeric": 1
+			}
+		},
+		{
+			"qDef": {
+				"qDef": "Sum([Table Number of Rows])",
+				"qLabel": "Total Number of Rows"
 			}
 		}
 	],
@@ -136,4 +85,4 @@ var varLvl2Data =	{
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"
-	}
+}

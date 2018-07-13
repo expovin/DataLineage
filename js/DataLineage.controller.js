@@ -1,13 +1,8 @@
-
-
-
 var mainController = ['$scope', function ( $scope ) {
 
 	$scope.Table={};
 
 	$scope.makeASelection = function(){
-//		console.log("Click!");
-		console.log(this);
 		var Field='Lineage Level '+this.ele.Level;
 
 			switch(this.ele.Level){
@@ -37,36 +32,40 @@ var mainController = ['$scope', function ( $scope ) {
 					Field="[Story Id]";
 					break;					
 			}		
-
-
 		
-		console.log("Field : "+Field+" Value : "+this.ele.Name);
-		console.log($scope.QlikApp.field(Field));
-
 		$scope.QlikApp.field(Field).selectValues([this.ele.Name], false);
-
 	}
 
-
 	$scope.writeTable = function(a){
-	//	console.log( $scope.arrowPosition);
-		$scope.Table.ObjName = $scope.MoreInfo[a.ele.Level][a.ele.Name].Title || "No Title";
+		var table_title = $scope.MoreInfo[a.ele.Level][a.ele.Name].Title;
+		$scope.Table.ObjName = table_title;
+
+		var tableDetails = $scope.MoreInfo[a.ele.Level][a.ele.Name];
+		delete tableDetails["Title"];
+		$scope.MoreInfo[a.ele.Level][a.ele.Name] = tableDetails;
+
+		
 		$scope.AddInfo = $scope.MoreInfo[a.ele.Level][a.ele.Name];
-		$('#collapseExample').collapse('show');
+		$scope.tmpTitle = table_title;
+
+		$('#collapseExample').removeClass('noBorder');
+		$('#collapseExample').addClass('withBorder');
+		$('#collapseExample').show();
 
 		$scope.arrowPosition = colorPath(a.ele.Name,$scope.arrowPosition,0);
-
 	}
 
 	$scope.cleanTable = function(a){
+		$scope.MoreInfo[a.ele.Level][a.ele.Name].Title = $scope.tmpTitle;
 		$scope.Table = {};
-		$('#collapseExample').collapse('hide');
+			$('#collapseExample').removeClass('withBorder');
+			$('#collapseExample').addClass('noBorder');
+			$('#collapseExample').hide();
 
 		for(var arrow in $scope.arrowPosition){
 			$scope.arrowPosition[arrow][6]='#afafaf';
 		}
 	}
-
 }];
 
 
@@ -100,40 +99,38 @@ function makeAdditionalInfo(reply,callback) {
 				var campo = reply.qHyperCube.qDataPages[0].qMatrix[fields][field].qText;
 				var outField = {};
 			}
-			else {
 				if(field<numDimensioni){
 					var FieldName = reply.qHyperCube.qDimensionInfo[field].qFallbackTitle; 
 					var FieldValue = reply.qHyperCube.qDataPages[0].qMatrix[fields][field].qText;
-					if( (FieldName.indexOf("Name")>0) || (FieldName.indexOf("Title")>0))
+					if( FieldName == "Title"){
 						var Title = FieldValue;
+					}
 				}
 				else {
 					var FieldName = reply.qHyperCube.qMeasureInfo[field-numDimensioni].qFallbackTitle; 
 					var FieldValue = reply.qHyperCube.qDataPages[0].qMatrix[fields][field].qText;
 				}
 
-				var obj={};
-				obj[FieldName] = FieldValue;
-				/*
-				if(!outField[campo])
-					outField[campo] = {};
-				*/
 				outField[FieldName] = FieldValue;
 				outField['Title'] = Title;
-
-			}
-			
 		}
 		outFields[campo]=outField;
 	}
-	//return(reply);
 	callback(outFields);
 }
 
- function getElementContentWidth(element) {
+function getElementContentWidth(element) {
+	var style = {};
 
-  var style = window.getComputedStyle(element);
-  return {'width' : style.width, 'height':style.height};
+	if(!element){
+		style.width = "0px";
+		style.height = "0px";
+	}
+	else{
+		style = window.getComputedStyle(element);
+	}
+
+	return {'width' : style.width, 'height':style.height};
 }
 
 function splitObject(matrix){
@@ -143,7 +140,6 @@ function splitObject(matrix){
 	for(var i=0; i<matrix[0].length; i++ )
 		nexMatrix.push([]);
 
-	//console.log(matrix);
 	for(ele in matrix){
 		for (f in matrix[ele]){
 			var found = jQuery.inArray(matrix[ele][f].qText, nexMatrix[f]);
@@ -153,11 +149,9 @@ function splitObject(matrix){
 			if(f>0){
 				found = jQuery.inArray(matrix[ele][f-1].qText+"^"+matrix[ele][f].qText, arrowsMatrix);			
 				if ((found == -1) && ((matrix[ele][f-1].qText != "-") || (matrix[ele][f].qText != "-")) ) {
-				//	console.log(matrix[ele][f-1].qText+" <<< ---- >>>>"+matrix[ele][f].qText);
 					arrowsMatrix.push(matrix[ele][f-1].qText+"^"+matrix[ele][f].qText);
 				}
 			}
-			
 		}
 	}
 	return [
@@ -198,26 +192,17 @@ String.prototype.hashCode = function() {
 
 
 function makeArrowsPosition(arrows, elements){
-
-
 	var lookup = {};
 	var links = [];
 
 	for (var i = 0, len = elements.length; i < len; i++) {
-	//	console.log(elements[i]);
 	    lookup[elements[i].Name] = {'backPoint' : elements[i]['backPoint'], 'forwardPoint':elements[i]['forwardPoint'],'Node':elements[i].Name,'Level':elements[i].Level};
 	}
-//	console.log("Lookup");
-//	console.log(lookup);
-
-//	console.log(arrows);
 	for(arrow in arrows){
 		var Ele=arrows[arrow].split("^");
 		var EleFrom=Ele[0];
 		var EleTo=Ele[1];
 		
-
-
 		if((EleTo != '-') && (EleFrom != '-'))
 		{
 
@@ -229,10 +214,8 @@ function makeArrowsPosition(arrows, elements){
 		{
 
 				EleTo=arrows[4].split("^")[1];
-		//		console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
 		}
 		if(((EleTo != '-') && (EleFrom != '-')) || (arrow == 3)) {
-		//	console.log('EleFrom : '+EleFrom+" - ElementTo :"+EleTo+" idx :"+arrow);
 			nuoveCoord = calcoloNuovoPuntoFinale(lookup[EleFrom].forwardPoint.wPos, lookup[EleFrom].forwardPoint.hPos, lookup[EleTo].backPoint.wPos,  lookup[EleTo].backPoint.hPos);
 			var x = nuoveCoord[0];
 			var y = nuoveCoord[1];
@@ -247,7 +230,7 @@ function makeArrowsPosition(arrows, elements){
 }
 
 
-function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
+function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo, elementsInfos){
 
 	var elements=[];
 	var element={};
@@ -276,76 +259,168 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 	var countW=0;
 	
 	for(ele in Elements){
+
 		var countH=0;
 
-
 		for(var field in Elements[ele]) {
+
 			backPoint=[];
 			forwardPoint=[];
+			var maxWidth=0;
 			if(Elements[ele][field] == '-'){
-				console.log("Trovato Elemento nullo :");
-
+				//empty element
+				//console.log("Trovato Elemento nullo :");
 			}
 			else
 			{
 				element['Name'] = Elements[ele][field];
-
 				
 				switch(qDimensionInfo[ele].qFallbackTitle){
 					case "Lineage Level 1":
-						element['icon'] = "/extensions/datalineage/img/Source.PNG";
+						element['icon'] = "/extensions/datalineage/img/data-connection.png";
 						element['Level'] = 0;
+						element['TextColor'] = "#000000";
+
+						for (var key in elementsInfos[ele]) { 
+						    if (elementsInfos[ele].hasOwnProperty(key)) { 
+						        if(elementsInfos[ele][key].Title == Elements[ele][field]){ 
+									element['Title'] = elementsInfos[ele][key].Title; 
+									element['TextWidth'] = element['Title'].length * 7.5;
+									if(elementsInfos[ele][key]["Connection Type"]==="folder"){
+										element['icon'] = "/extensions/datareach/img/folder.png";
+									}if(elementsInfos[ele][key]["Connection Type"]==="ODBC" 
+										|| elementsInfos[ele][key]["Connection Type"]==="OLEDB"
+										|| elementsInfos[ele][key]["Connection Type"]==="QvOdbcConnectorPackage.exe"){
+										element['icon'] = "/extensions/datareach/img/source.png";
+									}if(elementsInfos[ele][key]["Connection Type"]==="QvDataMarketConnector.exe"
+										|| elementsInfos[ele][key]["Connection Type"]==="IdevioGeoAnalyticsConnector.exe"
+										|| elementsInfos[ele][key]["Connection Type"]==="QvRestConnector.exe"){
+										element['icon'] = "/extensions/datareach/img/connector.png";
+									}
+								} 
+						    } 
+						} 
+
 						break;
 					case "Lineage Level 2":
-						element['icon'] = "/extensions/datalineage/img/QlikSenseApp.PNG";
+						element['icon'] = "/extensions/datalineage/img/qlik-sense-app.png";
 						element['Level'] = 1;
+						element['TextColor'] = "#000000"; 
+
+						for (var key in elementsInfos[ele]) { 
+						    if (elementsInfos[ele].hasOwnProperty(key)) { 
+						        if(elementsInfos[ele][key]["Document Id"] == Elements[ele][field]){ 
+									element['Title'] = elementsInfos[ele][key].Title; 
+									element['TextWidth'] = element['Title'].length * 7.5;
+								} 
+						    } 
+						} 
+
 						break;	
 					case "Lineage Level 3":
-						element['icon'] = "/extensions/datalineage/img/Table.PNG";
+						element['icon'] = "/extensions/datalineage/img/table.png";
 						element['Level'] = 2;
+						element['TextColor'] = "#000000"; 
+						
+						for (var key in elementsInfos[ele]) { 
+						    if (elementsInfos[ele].hasOwnProperty(key)) { 
+						        if(elementsInfos[ele][key]["%KeyTable"] == Elements[ele][field]){ 
+									element['Title'] = elementsInfos[ele][key].Title;
+									element['TextWidth'] = element['Title'].length * 7.5;
+								} 
+						    } 
+						} 
 						break;
 					case "Lineage Level 4":
-						element['icon'] = "/extensions/datalineage/img/Field.PNG";
+						element['icon'] = "/extensions/datalineage/img/field.png";
 						element['Level'] = 3;
+						element['TextColor'] = "#000000"; 
+
+						for (var key in elementsInfos[ele]) { 
+						    if (elementsInfos[ele].hasOwnProperty(key)) { 
+						        if(elementsInfos[ele][key]["Field Id"] == Elements[ele][field]){ 
+									element['Title'] = elementsInfos[ele][key].Title; 
+									element['TextWidth'] = element['Title'].length * 7.5;
+								} 
+						    } 
+						} 
+
 						break;
 					case "Lineage Level 5":
-					//	console.log("RVR look!", element['Name'].substring(0,1));
 						element['Level'] = 4;
-					    if(element['Name'].substring(0,1)=="D") 
-							{
-								element['icon'] = "/extensions/datalineage/img/Dimension.PNG";
-							//	console.log("should pain dim");
-							}
-						else if (element['Name'].substring(0,1)=="M") 
-							{
-								element['icon'] = "/extensions/datalineage/img/Expression.PNG";
-							//	console.log("should pain measure");
-							}
-						else// (element['Name'].substring(0,1)=="V") 
-							{
-								element['icon'] = "/extensions/datalineage/img/ItemLibrary.PNG";
-							//	console.log("should pain viz");
-							}
-						break;	
+						element['TextColor'] = "#000000"; 
+						element['TextWidth'] = 0;
+					    if(element['Name'].substring(0,1)=="D"){
+							element['icon'] = "/extensions/datalineage/img/dimension.png";
+						}
+						else if (element['Name'].substring(0,1)=="M"){
+							element['icon'] = "/extensions/datalineage/img/expression.png";
+						}
+						else{
+							element['icon'] = "/extensions/datalineage/img/item-library.png";
+						}
 
+						for (var key in elementsInfos[ele]) { 
+						    if (elementsInfos[ele].hasOwnProperty(key)) { 
+						        if(elementsInfos[ele][key]["%KeyLibraryObjectUsage"] == Elements[ele][field]){ 
+									element['Title'] = elementsInfos[ele][key].Title; 
+									element['TextWidth'] = element['Title'].length * 7.5;
+								} 
+						    } 
+						} 
+
+						break;	
 					case "Lineage Level 6":
-						element['icon'] = "/extensions/datalineage/img/Sheet.PNG";
+						element['icon'] = "/extensions/datalineage/img/sheet.png";
 						element['Level'] = 5;
+						element['TextColor'] = "#000000"; 
+						
+						for (var key in elementsInfos[ele]) { 
+						    if (elementsInfos[ele].hasOwnProperty(key)) { 
+						        if(elementsInfos[ele][key]["Sheet Id"] == Elements[ele][field]){ 
+									element['Title'] = elementsInfos[ele][key].Title; 
+									element['TextWidth'] = element['Title'].length * 7.5;
+								} 
+						    } 
+						} 
+
 						break;
 					case "Lineage Level 7":
-						element['icon'] = "/extensions/datalineage/img/Visualization.PNG";
+						element['icon'] = "/extensions/datalineage/img/visualization.png";
 						element['Level'] = 6;
+						element['TextColor'] = "#000000"; 
+						
+						for (var key in elementsInfos[ele]) { 
+						    if (elementsInfos[ele].hasOwnProperty(key)) { 
+						        if(elementsInfos[ele][key]["Sheet Object Id"] == Elements[ele][field]){ 
+									element['Title'] = elementsInfos[ele][key].Title; 
+									element['TextWidth'] = element['Title'].length * 7.5;
+								} 
+						    } 
+						} 
+
 						break;	
 					case "Lineage Level 8":
-						element['icon'] = "/extensions/datalineage/img/StoryVisualization.PNG";
+						element['icon'] = "/extensions/datalineage/img/story-visualization.png";
 						element['Level'] = 7;
+						element['TextColor'] = "#000000"; 
+						
+						for (var key in elementsInfos[ele]) { 
+						    if (elementsInfos[ele].hasOwnProperty(key)) { 
+						        if(elementsInfos[ele][key]["Story Id"] == Elements[ele][field]){ 
+									element['Title'] = elementsInfos[ele][key].Title; 
+									element['TextWidth'] = element['Title'].length * 7.5;
+								} 
+						    } 
+						} 
 						break;					
 				}			
 
-			
-
 				element['hPos'] = (countH * hDistance[ele])+marginTop;
 				element['wPos'] = ((countW * wDistance) + marginLeft);
+
+				element['hBox'] = element['hPos'];//+40;
+				element['wBox'] = element['wPos'] + 35;
 				
 
 				// BackPoint attach
@@ -360,13 +435,13 @@ function makeElementPosition(boxDimension, Elements, settings, qDimensionInfo){
 
 				elements.push(element);
 				
+
 				element={};
 				countH +=1;
 			}
 		
 		}
 		countW +=1;
-
 	}
 	return elements;
 }

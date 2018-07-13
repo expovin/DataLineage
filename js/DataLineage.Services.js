@@ -1,13 +1,8 @@
-    .factory('dataLineageFactory',[function($resource,CONFIG) {          
+.factory('dataLineageFactory',[function($resource,CONFIG) {          
+    var lineage = {};
 
-            var lineage = {};
+	lineage={'test':1};
 
-            	lineage={'test':1};
-
-                return lineage;
-
-    }])   
-
-
-   
+    return lineage;
+}])   
 ;

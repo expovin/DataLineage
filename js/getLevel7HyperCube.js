@@ -1,74 +1,50 @@
 var varLvl7Data = {
 	"qInitialDataFetch": [
 		{
-			"qHeight": 20,
+			"qHeight": 1000,
 			"qWidth": 4
 		}
 	],
 	"qDimensions": [
 		{
-			"qLabel": "Lineage Level 7",
-			"qLibraryId": "sPypP",
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
-		},
-		{
-			"qLabel": "Sheet Object Title",
-			"qLibraryId": "aewpFf",
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
+			"qDef": {
+				"qFieldDefs": [
+					"Sheet Object Id"
+				],
+			    "qFieldLabels": [
+			      "Sheet Object Id"
+			    ]
+			},
+			"qNullSuppression": true
 		},
 		{
 			"qDef": {
 				"qFieldDefs": [
-					"[Sheet Object Visualization Type]&:\":\"&[Sheet Object Type]"
-				]
+					"Sheet Object Title"
+				],
+			    "qFieldLabels": [
+			      "Title"
+			    ],
+			    "qSortCriterias": [
+			      {
+			        "qSortByAscii": 1
+			      }
+			    ]
 			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
+			"qNullSuppression": true
 		}
 	],
 	"qMeasures": [
 		{
 			"qDef": {
-				"qDef": "Avg([Sheet Object Load Time])"
-			},
-			"qLabel": "Avg([Sheet Object Load Time])",
-			"qLibraryId": null,
-			"qSortBy": {
-				"qSortByState": 0,
-				"qSortByFrequency": 0,
-				"qSortByNumeric": 0,
-				"qSortByAscii": 1,
-				"qSortByLoadOrder": 0,
-				"qSortByExpression": 0,
-				"qExpression": {
-					"qv": " "
-				}
+				"qDef": "[Sheet Object Visualization Type]&': '&[Sheet Object Type]",
+				"qLabel": "Sheet Object Type"
+			}
+		},
+		{
+			"qDef": {
+				"qDef": "Avg([Sheet Object Load Time])",
+				"qLabel": "Average Load Time"
 			}
 		}
 	],
@@ -77,4 +53,4 @@ var varLvl7Data = {
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"
-	}
+}

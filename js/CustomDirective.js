@@ -1,6 +1,5 @@
 define( [	"jquery",
 			"qvangular"
-						
 		],
 	function ( $,qvangular ) {
 
@@ -45,7 +44,6 @@ define( [	"jquery",
             return function(scope, element, attrs) {
                 scope.$watch(attrs.ngY2, function(value) {
                     element.attr('y2', value);
-                })
-                
+                }) 
             }});
 	})

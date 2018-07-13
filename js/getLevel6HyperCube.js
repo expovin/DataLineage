@@ -1,57 +1,43 @@
 var varLvl6Data = {
 	"qInitialDataFetch": [
 		{
-			"qHeight": 20,
+			"qHeight": 1000,
 			"qWidth": 6
 		}
 	],
 	"qDimensions": [
 		{
-			"qLabel": "Lineage Level 6",
-			"qLibraryId": "pCmjJmJ",
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
+			"qDef": {
+				"qFieldDefs": [
+					"Sheet Id"
+				],
+			    "qFieldLabels": [
+			      "Sheet Id"
+			    ]
+			},
+			"qNullSuppression": true
 		},
 		{
 			"qDef": {
 				"qFieldDefs": [
 					"Sheet Title"
-				]
+				],
+			    "qFieldLabels": [
+			      "Title"
+			    ],
+			    "qSortCriterias": [
+			      {
+			        "qSortByAscii": 1
+			      }
+			    ]
 			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
-			}
+			"qNullSuppression": true
 		},
 		{
 			"qDef": {
 				"qFieldDefs": [
 					"Sheet Id"
 				]
-			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
 			}
 		},
 		{
@@ -59,16 +45,6 @@ var varLvl6Data = {
 				"qFieldDefs": [
 					"Sheet Description"
 				]
-			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
 			}
 		},
 		{
@@ -76,16 +52,6 @@ var varLvl6Data = {
 				"qFieldDefs": [
 					"Sheet Owner by Username"
 				]
-			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
 			}
 		},
 		{
@@ -93,16 +59,6 @@ var varLvl6Data = {
 				"qFieldDefs": [
 					"Sheet Published"
 				]
-			},
-			"qNullSuppression": false,
-			"qOtherTotalSpec": {
-				"qOtherMode": "OTHER_OFF",
-				"qSuppressOther": false,
-				"qOtherSortMode": "OTHER_SORT_DESCENDING",
-				"qOtherCounted": {
-					"qv": "5"
-				},
-				"qOtherLimitMode": "OTHER_GE_LIMIT"
 			}
 		}
 	],
@@ -112,4 +68,4 @@ var varLvl6Data = {
 	"qMode": "S",
 	"qInterColumnSortOrder": [],
 	"qStateName": "$"
-	}
+}
